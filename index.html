@@ -1,40 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="description" content="OpsGate - WordPress operations with guardrails, not guesswork. Automated monitoring, security scanning, and evidence packs for agencies.">
-  <meta name="keywords" content="WordPress, operations, security, monitoring, agencies, automation">
-  <meta name="author" content="OpsGate">
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OpsGate – WordPress Operations, Automated</title>
-  
-  <!-- Preload critical resources -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>OpsGate Strategic Framework | WordPress Operations Control Plane</title>
+  <meta name="description" content="Professional strategic framework: Market analysis, technical architecture, and phased execution plan for OpsGate WordPress operations control plane." />
   
   <style>
-    /* Critical CSS - inlined for performance */
-    :root {
-      --bg: #050716;
-      --bg-alt: #0b1022;
-      --card: #10152b;
-      --card-alt: #151b33;
-      --accent: #35e0b8;
-      --accent-soft: rgba(53, 224, 184, 0.12);
-      --accent-strong: #21b392;
-      --text: #f4f7ff;
-      --muted: #9aa3c2;
-      --border-subtle: rgba(255, 255, 255, 0.06);
-      --danger: #ff6b6b;
-      --success: #4ade80;
-      --warning: #fbbf24;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.4);
-      --radius-lg: 18px;
-      --radius-xl: 24px;
-      --radius-pill: 999px;
-      --max-width: 1120px;
-      --transition-fast: 0.18s ease-out;
-      --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    :root{
+      --bg: #0a111f;
+      --bg2: #071022;
+      --panel: #0f1a2e;
+      --panel2: #0c172a;
+      --text: #f0f5ff;
+      --muted: #a9b6d6;
+      --line: rgba(255,255,255,.12);
+      --accent: #7c5cff;
+      --accent2: #00d0ff;
+      --critical: #ff4d6d;
+      --warning: #ffcc66;
+      --success: #25d695;
+      --info: #5d8aff;
+
+      --radius: 16px;
+      --shadow: 0 20px 50px rgba(0,0,0,.35);
+      --shadow2: 0 12px 32px rgba(0,0,0,.25);
+      --glow: 0 0 40px rgba(124,92,255,.15);
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif;
+      --max: 1200px;
     }
 
     * {
@@ -48,1550 +43,1417 @@
     }
 
     body {
-      margin: 0;
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #121731 0, #02030a 55%, #000 100%);
+      font-family: var(--sans);
       color: var(--text);
+      background:
+        radial-gradient(1000px 700px at 10% 10%, rgba(124,92,255,.2), transparent 50%),
+        radial-gradient(900px 600px at 90% 20%, rgba(0,208,255,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
       line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    /* Focus styles for accessibility */
-    button:focus-visible,
-    a:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-
-    /* Skip link for keyboard users */
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 6px;
-      background: var(--accent);
-      color: var(--bg);
-      padding: 8px 12px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 600;
-      z-index: 100;
-      transition: top 0.3s;
-    }
-
-    .skip-link:focus {
-      top: 6px;
-    }
-
-    /* Enhanced animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0.7;
-      }
-    }
-
-    @keyframes ripple {
-      0% {
-        transform: scale(0, 0);
-        opacity: 0.5;
-      }
-      100% {
-        transform: scale(20, 20);
-        opacity: 0;
-      }
-    }
-
-    @keyframes rotate {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes shieldPulse {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.05);
-        opacity: 0.8;
-      }
-    }
-
-    .fade-in {
-      opacity: 0;
-      animation: fadeInUp 0.6s ease-out forwards;
-    }
-
-    .pulse {
-      animation: pulse 2s infinite;
-    }
-
-    .page {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* NAVBAR */
-    .nav {
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
       position: sticky;
       top: 0;
-      z-index: 50;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(to bottom,
-        rgba(5, 7, 22, 0.98),
-        rgba(5, 7, 22, 0.94),
-        rgba(5, 7, 22, 0.88)
-      );
-      border-bottom: 1px solid var(--border-subtle);
+      z-index: 100;
+      background: rgba(10, 17, 31, 0.95);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
     }
 
-    .nav-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 14px 20px;
+    .nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      padding: 20px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 700;
+      font-size: 1.25rem;
     }
 
     .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-size: 0.92rem;
-      transition: transform var(--transition-fast);
-    }
-
-    .logo:hover {
-      transform: translateY(-1px);
-    }
-
-    /* OG-FOCUSED LOGO - Back to initials with enhanced design */
-    .logo-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      background: radial-gradient(circle at 30% 0, #ffffff 0, #35e0b8 35%, #1b6e58 70%, #050716 100%);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16),
-                  0 10px 24px rgba(0, 0, 0, 0.5);
-      position: relative;
-      overflow: hidden;
-      transition: transform var(--transition-smooth);
-    }
-
-    .logo:hover .logo-mark {
-      transform: rotate(5deg) scale(1.05);
-    }
-
-    .logo-mark::after {
-      content: "";
-      position: absolute;
-      inset: 6px;
-      border-radius: inherit;
-      border: 1px solid rgba(5, 7, 22, 0.36);
-    }
-
-    /* OG Letters - Enhanced version */
-    .logo-mark span {
-      font-size: 0.9rem;
-      font-weight: 800;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
-      color: #050716;
-      letter-spacing: -0.5px;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Add subtle gate effect around OG */
-    .logo-mark::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: inherit;
-      border: 2px solid rgba(53, 224, 184, 0.3);
-      box-shadow: inset 0 0 10px rgba(53, 224, 184, 0.2);
-      pointer-events: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: var(--glow);
     }
 
     .nav-links {
       display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 0.9rem;
+      gap: 4px;
+    }
+
+    .nav-link {
+      padding: 10px 18px;
+      border-radius: 10px;
       color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
     }
 
-    .nav-links a {
-      padding: 6px 10px;
-      border-radius: 999px;
-      transition: background var(--transition-fast), color var(--transition-fast);
-    }
-
-    .nav-links a:hover {
-      background: rgba(255, 255, 255, 0.04);
+    .nav-link:hover {
+      background: rgba(255,255,255,.05);
       color: var(--text);
-    }
-
-    .nav-cta {
-      padding: 8px 16px;
-      border-radius: var(--radius-pill);
-      background: var(--accent);
-      color: #041016;
-      font-size: 0.9rem;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 10px 22px rgba(8, 255, 193, 0.28);
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
-                  background var(--transition-fast);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .nav-cta::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 5px;
-      height: 5px;
-      background: rgba(255, 255, 255, 0.5);
-      opacity: 0;
-      border-radius: 100%;
-      transform: scale(1, 1) translate(-50%);
-      transform-origin: 50% 50%;
-    }
-
-    .nav-cta:focus:not(:active)::after {
-      animation: ripple 1s ease-out;
-    }
-
-    .nav-cta:hover {
-      transform: translateY(-1px);
-      background: var(--accent-strong);
-      box-shadow: 0 16px 40px rgba(12, 224, 181, 0.38);
-    }
-
-    /* LAYOUT */
-    main {
-      flex: 1;
-    }
-
-    .section {
-      padding: 56px 20px;
-      position: relative;
-    }
-
-    .section::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent-soft), transparent);
-      bottom: 0;
-      left: 0;
-    }
-
-    .section:last-child::before {
-      display: none;
-    }
-
-    .section-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-
-    .section-header {
-      margin-bottom: 24px;
-      max-width: 600px;
-    }
-
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-size: 0.8rem;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
-
-    h1, h2, h3 {
-      margin: 0;
-      line-height: 1.2;
-    }
-
-    h1 {
-      font-size: clamp(2.4rem, 3vw + 1.6rem, 3.3rem);
-      letter-spacing: -0.03em;
-    }
-
-    h2 {
-      font-size: clamp(1.6rem, 2vw + 1rem, 2rem);
-      letter-spacing: -0.01em;
-    }
-
-    p {
-      margin: 0;
-    }
-
-    .muted {
-      color: var(--muted);
-    }
-
-    /* HERO */
-    .hero {
-      padding-top: 64px;
-      padding-bottom: 72px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
-      gap: 32px;
-      align-items: center;
-    }
-
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px 4px 4px;
-      border-radius: 999px;
-      background: rgba(9, 255, 196, 0.06);
-      border: 1px solid rgba(53, 224, 184, 0.3);
-      font-size: 0.8rem;
-      margin-bottom: 16px;
-    }
-
-    .hero-kicker-pill {
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.4);
-      font-weight: 600;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.11em;
-    }
-
-    .hero-subtitle {
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-
-    .hero-subtitle strong {
-      color: #dfe6ff;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 24px;
-      align-items: center;
     }
 
     .btn-primary {
-      padding: 12px 22px;
-      border-radius: var(--radius-pill);
-      border: none;
-      font-weight: 600;
-      font-size: 0.96rem;
-      cursor: pointer;
-      background: linear-gradient(120deg, #35e0b8, #4ff1c0);
-      color: #041016;
-      box-shadow: 0 14px 32px rgba(18, 255, 200, 0.35);
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
-        filter var(--transition-fast);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-primary::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 5px;
-      height: 5px;
-      background: rgba(255, 255, 255, 0.5);
-      opacity: 0;
-      border-radius: 100%;
-      transform: scale(1, 1) translate(-50%);
-      transform-origin: 50% 50%;
-    }
-
-    .btn-primary:focus:not(:active)::after {
-      animation: ripple 1s ease-out;
-    }
-
-    .btn-primary span.chevron {
-      font-size: 1.1rem;
-      margin-top: 1px;
+      justify-content: center;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #061022;
+      font-weight: 700;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      box-shadow: 0 12px 30px rgba(124,92,255,.25);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 42px rgba(18, 255, 200, 0.45);
-      filter: brightness(1.03);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(124,92,255,.3);
     }
 
-    .btn-ghost {
-      padding: 11px 18px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(4, 8, 21, 0.7);
-      color: var(--muted);
-      font-size: 0.9rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: border-color var(--transition-fast),
-        background var(--transition-fast), color var(--transition-fast),
-        transform var(--transition-fast);
+    /* Hero */
+    .hero {
+      padding: 100px 0 80px;
       position: relative;
-      overflow: hidden;
     }
 
-    .btn-ghost::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 5px;
-      height: 5px;
-      background: rgba(255, 255, 255, 0.5);
-      opacity: 0;
-      border-radius: 100%;
-      transform: scale(1, 1) translate(-50%);
-      transform-origin: 50% 50%;
-    }
-
-    .btn-ghost:focus:not(:active)::after {
-      animation: ripple 1s ease-out;
-    }
-
-    .btn-ghost svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    .btn-ghost:hover {
-      border-color: rgba(255, 255, 255, 0.42);
-      background: rgba(15, 22, 50, 0.85);
-      color: var(--text);
-      transform: translateY(-1px);
-    }
-
-    .hero-meta {
-      margin-top: 18px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .hero-meta span {
+    .tagline {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 12px;
+      padding: 12px 24px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      margin-bottom: 40px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
     }
 
     .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(53, 224, 184, 0.22);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
     }
 
-    .hero-panel {
-      border-radius: var(--radius-xl);
-      background: radial-gradient(circle at top left, #2a314f 0, #10152b 40%, #050716 100%);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: var(--shadow-soft);
-      padding: 20px 20px 18px;
-      position: relative;
-      overflow: hidden;
+    h1 {
+      font-size: 3.75rem;
+      line-height: 1.1;
+      margin-bottom: 28px;
+      letter-spacing: -0.02em;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--text) 0%, var(--muted) 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .hero-panel::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 0 0, rgba(53, 224, 184, 0.12), transparent 60%),
-        radial-gradient(circle at 100% 0, rgba(110, 161, 255, 0.12), transparent 55%);
-      opacity: 0.85;
-      pointer-events: none;
-    }
-
-    .hero-panel::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(53, 224, 184, 0.05) 0%, transparent 70%);
-      animation: rotate 20s linear infinite;
-      pointer-events: none;
-    }
-
-    .hero-panel-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .hero-pill {
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(4, 8, 21, 0.72);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: rgba(223, 230, 255, 0.92);
-    }
-
-    .hero-taglist {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .tag {
-      padding: 3px 9px;
-      border-radius: 999px;
-      background: rgba(2, 6, 30, 0.78);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      font-size: 0.7rem;
+    .hero-subtitle {
+      font-size: 1.375rem;
       color: var(--muted);
+      max-width: 800px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+      font-weight: 400;
     }
 
-    .hero-status-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 14px;
+    /* Cards & Layout */
+    .section {
+      padding: 100px 0;
     }
 
-    .status-card {
-      padding: 9px 10px;
-      border-radius: 14px;
-      background: rgba(3, 7, 25, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      font-size: 0.76rem;
-    }
-
-    .status-label {
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .status-value {
+    .section-title {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 12px;
+      margin-bottom: 20px;
+      color: var(--accent2);
+      font-size: 0.95rem;
       font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
-    .status-badge {
-      padding: 2px 6px;
-      border-radius: 999px;
-      background: rgba(7, 26, 22, 0.9);
-      color: var(--accent);
-      border: 1px solid rgba(53, 224, 184, 0.35);
-      font-size: 0.7rem;
+    h2 {
+      font-size: 2.75rem;
+      margin-bottom: 28px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.01em;
     }
 
-    .status-danger {
-      color: var(--danger);
-    }
-
-    .status-pulse {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 5px rgba(53, 224, 184, 0.3);
-      position: relative;
-    }
-
-    .status-pulse::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 999px;
-      background: var(--accent);
-      animation: pulse 2s infinite;
-    }
-
-    .hero-timeline {
-      margin-top: 6px;
-      padding-top: 10px;
-      border-top: 1px dashed rgba(255, 255, 255, 0.12);
-      font-size: 0.76rem;
+    .section-description {
+      font-size: 1.125rem;
       color: var(--muted);
-    }
-
-    .hero-timeline strong {
-      color: #dfe6ff;
-    }
-
-    /* GRID UTIL */
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+      max-width: 800px;
+      margin-bottom: 56px;
+      line-height: 1.7;
     }
 
     .grid-2 {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
     }
 
-    @media (max-width: 880px) {
-      .hero-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .hero {
-        padding-top: 40px;
-      }
-
-      .grid-3,
-      .grid-2 {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .nav-inner {
-        padding-inline: 16px;
-      }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
     }
 
-    /* FIXED: Buttons will now stay side-by-side on all screen sizes */
-    @media (max-width: 768px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-      
-      /* REMOVED the stacking for buttons */
-      /* .hero-actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      
-      .btn-primary, .btn-ghost {
-        width: 100%;
-        justify-content: center;
-      } */
-      
-      /* ADDED: Keep buttons side-by-side with flexible sizing */
-      .hero-actions {
-        flex-direction: row;
-        flex-wrap: wrap;
-      }
-      
-      .btn-primary, .btn-ghost {
-        flex: 1;
-        min-width: 200px;
-        justify-content: center;
-      }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
     }
 
-    /* For very small screens, allow wrapping */
-    @media (max-width: 480px) {
-      .hero-actions {
-        flex-direction: row;
-        flex-wrap: wrap;
-      }
-      
-      .btn-primary, .btn-ghost {
-        flex: 1 1 100%;
-        min-width: 0;
-      }
-    }
-
-    /* CARDS & SECTIONS */
     .card {
-      background: var(--card);
-      border-radius: var(--radius-lg);
-      padding: 16px 16px 18px;
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
-      transition: transform var(--transition-fast), box-shadow var(--transition-smooth);
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 36px;
+      backdrop-filter: blur(10px);
+      transition: border-color 0.3s ease;
     }
 
     .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+      border-color: rgba(124,92,255,.3);
     }
 
-    .card-alt {
-      background: var(--card-alt);
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      color: var(--text);
     }
 
-    .card-title {
+    .card p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
       font-size: 1rem;
-      margin-bottom: 6px;
     }
 
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: rgba(2, 6, 23, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      font-size: 0.7rem;
+    .divider {
+      height: 1px;
+      background: var(--line);
+      margin: 60px 0;
+    }
+
+    /* Tables */
+    .table-container {
+      overflow-x: auto;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.2);
+      margin: 24px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 800px;
+    }
+
+    th {
+      text-align: left;
+      padding: 22px 28px;
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-weight: 600;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.95rem;
+    }
+
+    td {
+      padding: 22px 28px;
+      border-bottom: 1px solid var(--line);
       color: var(--muted);
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+      vertical-align: top;
+      font-size: 0.95rem;
+      line-height: 1.6;
     }
 
-    .chip-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent);
+    tr:last-child td {
+      border-bottom: none;
     }
 
-    .pill-row {
+    /* Architecture Diagram */
+    .arch-flow {
+      display: grid;
+      gap: 20px;
+    }
+
+    .arch-step {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .pill-soft {
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(14, 22, 46, 0.94);
-      font-size: 0.76rem;
-      color: var(--muted);
-    }
-
-    .pill-soft strong {
-      color: #e5ecff;
-      font-weight: 500;
-    }
-
-    .pain-list {
-      padding-left: 18px;
-      margin-top: 8px;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .pain-list li {
-      margin-bottom: 5px;
-    }
-
-    .muted-small {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    /* TIMELINE / PILOT */
-    .pilot-wrap {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.8fr);
-      gap: 24px;
-      align-items: stretch;
-    }
-
-    @media (max-width: 880px) {
-      .pilot-wrap {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .timeline {
-      border-radius: var(--radius-lg);
-      background: var(--card);
-      border: 1px solid var(--border-subtle);
-      padding: 14px 14px 16px;
-      font-size: 0.9rem;
-    }
-
-    .timeline-row {
-      display: grid;
-      grid-template-columns: 90px minmax(0, 1fr);
-      gap: 12px;
       align-items: flex-start;
-      padding-block: 6px;
+      gap: 28px;
+      padding: 28px;
+      background: rgba(0,0,0,.2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: transform 0.3s ease;
     }
 
-    .timeline-row:not(:last-child) {
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
-    }
-
-    .timeline-label {
-      font-weight: 600;
-      color: #dde5ff;
-    }
-
-    .timeline-body {
-      color: var(--muted);
-    }
-
-    .timeline-body strong {
-      color: #e3ebff;
-      font-weight: 500;
-    }
-
-    /* FAQ */
-    .faq-item {
-      border-radius: 14px;
-      border: 1px solid var(--border-subtle);
-      padding: 18px 20px;
-      background: rgba(5, 8, 26, 0.9);
-      margin-bottom: 14px;
-      transition: transform var(--transition-fast), border-color var(--transition-fast);
-      border-left: 4px solid transparent;
-    }
-
-    .faq-item:hover {
+    .arch-step:hover {
       transform: translateX(4px);
-      border-left-color: var(--accent);
-      background: rgba(8, 13, 38, 0.95);
+      border-color: rgba(124,92,255,.4);
     }
 
-    .faq-question {
-      font-weight: 600;
-      margin-bottom: 8px;
-      font-size: 1.05rem;
-      color: #e6edff;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .faq-question::before {
-      content: "?";
-      width: 24px;
-      height: 24px;
-      background: var(--accent);
-      color: var(--bg);
-      border-radius: 50%;
+    .step-number {
+      width: 52px;
+      height: 52px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #061022;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 1.375rem;
+      flex-shrink: 0;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-content h4 {
+      font-size: 1.25rem;
+      margin-bottom: 12px;
       font-weight: 700;
+      color: var(--text);
     }
 
-    .faq-answer {
-      font-size: 0.95rem;
+    .step-content p {
       color: var(--muted);
-      line-height: 1.5;
-      padding-left: 34px;
+      margin: 0;
+      line-height: 1.7;
     }
 
-    .faq-answer strong {
-      color: #e3ebff;
+    /* Tiers */
+    .tier {
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .tier:hover {
+      transform: translateY(-8px);
+    }
+
+    .tier.highlight {
+      border-color: rgba(124,92,255,.5);
+      box-shadow: var(--glow);
+    }
+
+    .tier-badge {
+      position: absolute;
+      top: 20px;
+      right: -24px;
+      transform: rotate(45deg);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #061022;
+      padding: 10px 48px;
+      font-size: 0.875rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+
+    .price {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin: 28px 0 8px;
+      color: var(--text);
+    }
+
+    .price-period {
+      color: var(--muted);
+      font-size: 0.95rem;
       font-weight: 500;
     }
 
-    /* FREE BADGE */
-    .free-badge {
-      display: inline-flex;
+    /* Status Indicators */
+    .status-critical { color: var(--critical); }
+    .status-warning { color: var(--warning); }
+    .status-success { color: var(--success); }
+    .status-info { color: var(--info); }
+
+    /* Hybrid Architecture Visualization */
+    .hybrid-visual {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 40px;
       align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(53, 224, 184, 0.15), rgba(33, 179, 146, 0.1));
-      border: 1px solid rgba(53, 224, 184, 0.3);
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--accent);
-      margin-left: 10px;
-      animation: pulse 3s infinite;
+      margin: 40px 0;
+      padding: 40px;
+      background: rgba(0,0,0,.2);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
     }
 
-    .free-badge::before {
-      content: "✓";
-      font-size: 0.9rem;
-      font-weight: bold;
-    }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border-subtle);
-      padding: 16px 20px 20px;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .footer-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
+    .hybrid-column {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 8px;
-      align-items: center;
+      flex-direction: column;
+      gap: 20px;
     }
 
-    .badge {
-      display: inline-flex;
+    .hybrid-connector {
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 6px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: rgba(4, 9, 23, 0.9);
-      font-size: 0.78rem;
+      gap: 10px;
+      color: var(--accent2);
+      font-weight: 600;
+    }
+
+    .connector-line {
+      width: 2px;
+      height: 100px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2));
+    }
+
+    /* Evidence-First Callout */
+    .evidence-callout {
+      background: linear-gradient(135deg, rgba(37,214,149,.1), rgba(124,92,255,.05));
+      border: 1px solid rgba(37,214,149,.3);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin: 40px 0;
+    }
+
+    .evidence-callout h3 {
+      color: var(--success);
+      margin-bottom: 20px;
+    }
+
+    /* Product to Market Callout */
+    .product-callout {
+      background: linear-gradient(135deg, rgba(124,92,255,.1), rgba(0,208,255,.05));
+      border: 1px solid rgba(124,92,255,.3);
+      border-radius: var(--radius);
+      padding: 40px;
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .product-callout h2 {
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .product-callout p {
       color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 24px;
+      font-size: 1.125rem;
     }
 
-    .badge span {
-      color: #e6edff;
+    /* Footer */
+    footer {
+      padding: 80px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      background: rgba(0,0,0,.2);
     }
 
-    @media (max-width: 600px) {
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 60px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .grid-3, .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .hybrid-visual {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .hybrid-connector {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+      }
+      
       .nav-links {
         display: none;
       }
       
-      .footer-inner {
-        flex-direction: column;
-        text-align: center;
+      h1 {
+        font-size: 2.75rem;
       }
       
-      .faq-question {
-        font-size: 1rem;
+      h2 {
+        font-size: 2.25rem;
       }
       
-      .faq-answer {
-        padding-left: 0;
+      .hero {
+        padding: 80px 0 60px;
       }
       
-      .faq-question::before {
-        width: 20px;
-        height: 20px;
-        font-size: 0.8rem;
-        flex-shrink: 0;
-      }
-      
-      .free-badge {
-        margin-left: 6px;
-        padding: 4px 10px;
-        font-size: 0.8rem;
-      }
-    }
-
-    /* Print styles */
-    @media print {
-      .nav, .hero-actions, footer .badge {
-        display: none;
-      }
-      
-      body {
-        background: white;
-        color: black;
+      .section {
+        padding: 80px 0;
       }
       
       .card {
-        border: 1px solid #ddd;
-        box-shadow: none;
+        padding: 28px;
       }
       
-      .section::before {
-        display: none;
+      .footer-content {
+        flex-direction: column;
+        gap: 40px;
       }
     }
+
+    /* Utility Classes */
+    .text-gradient {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .mono {
+      font-family: var(--mono);
+      font-size: 0.9em;
+      color: var(--accent2);
+    }
+
+    .strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,92,255,.1), rgba(0,208,255,.05));
+      border: 1px solid rgba(124,92,255,.3);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin: 32px 0;
+    }
   </style>
-  
-  <!-- Non-critical CSS loaded asynchronously -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
 </head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  
-  <div class="page">
-    <header class="nav" role="banner">
-      <div class="nav-inner">
-        <a href="#top" class="logo" aria-label="OpsGate Home">
-          <div class="logo-mark">
-            <span>OG</span>
-          </div>
+  <header>
+    <div class="wrap">
+      <nav class="nav">
+        <div class="brand">
+          <div class="logo"></div>
           <span>OpsGate</span>
-        </a>
-        <nav class="nav-links" aria-label="Main navigation">
-          <a href="#how-it-works">How it works</a>
-          <a href="#features">Features</a>
-          <a href="#pilot">14-Day Pilot</a>
-          <a href="#faq">FAQ</a>
-        </nav>
-        <button class="nav-cta" aria-label="Request a free pilot program">
-          Request Free Pilot
+        </div>
+        <div class="nav-links">
+          <a href="#problem" class="nav-link">Market Analysis</a>
+          <a href="#solution" class="nav-link">Solution</a>
+          <a href="#hybrid" class="nav-link">Hybrid Architecture</a>
+          <a href="#architecture" class="nav-link">Technical Architecture</a>
+          <a href="#tiers" class="nav-link">Business Model</a>
+          <a href="#execution" class="nav-link">Execution</a>
+          <a href="#qa" class="nav-link">QA</a>
+        </div>
+        <button class="btn-primary" onclick="window.scrollTo({top: document.getElementById('tiers').offsetTop - 80, behavior: 'smooth'})">
+          View Business Model
         </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero wrap">
+      <div class="tagline">
+        <span class="dot"></span>
+        <span>STRATEGIC FRAMEWORK — CONFIDENTIAL</span>
       </div>
-    </header>
+      <h1>OpsGate: WordPress Operations Control Plane</h1>
+      <p class="hero-subtitle">
+        A professional framework for implementing an authoritative control plane for WordPress site operations. 
+        This document outlines the market opportunity, technical architecture, business model, 
+        and phased execution strategy for a dashboard-first operational intelligence platform.
+      </p>
+      <div class="divider"></div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Executive Summary</h3>
+          <p>
+            OpsGate addresses the critical operational visibility gap in the WordPress ecosystem by establishing 
+            a single source of truth for site health, security posture, and change management. Unlike fragmented 
+            tools that generate static reports, OpsGate delivers real-time, actionable intelligence through 
+            an authoritative, dashboard-first control plane.
+          </p>
+          <p><span class="strong">Market Position:</span> Authoritative control plane, not another scanner</p>
+          <p><span class="strong">Core Architecture:</span> API-authoritative with WordPress thin client pattern</p>
+          <p><span class="strong">Business Model:</span> Tiered SaaS aligned to operational maturity levels</p>
+        </div>
+        <div class="card">
+          <h3>Core Architectural Principle</h3>
+          <p class="mono" style="font-size: 1.1rem; margin-bottom: 24px;">
+            Business Model → API → Data Model → Execution → UI
+          </p>
+          <ul style="color: var(--muted); line-height: 1.8; padding-left: 20px;">
+            <li><span class="strong">Hybrid Architecture:</span> WordPress plugin + Web platform integration</li>
+            <li><span class="strong">Dashboard-First Product Experience</span> — Intelligence surfaces through UI, not files</li>
+            <li><span class="strong">Single Authoritative API</span> — All state changes validated through API</li>
+            <li><span class="strong">Evidence-Based Operational Intelligence</span> — Every action produces verifiable evidence</li>
+            <li><span class="strong">Agency-Grade Proof-of-Work Systems</span> — Automated client reporting and compliance</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-    <main id="main-content">
-      <!-- HERO SECTION -->
-      <section class="section hero" aria-labelledby="hero-heading">
-        <div class="section-inner hero-grid">
-          <div class="fade-in">
-            <div class="hero-kicker">
-              <span class="hero-kicker-pill">WordPress Ops Layer</span>
-              <span class="muted-small">For agencies and security-minded studios</span>
-            </div>
-            <h1 id="hero-heading">Transform WordPress Chaos into Controlled Operations</h1>
-            <p class="hero-subtitle">
-              <strong>OpsGate</strong> provides the operational guardrails WordPress agencies desperately need. 
-              We monitor your sites proactively, catch plugin vulnerabilities and SSL issues before they escalate, 
-              and deliver <strong>client-ready evidence packs</strong> that prove your operational excellence—without 
-              disrupting your existing workflow.
+    <!-- NEW: First Product to Market Callout -->
+    <section class="wrap">
+      <div class="product-callout">
+        <h2>First Product to Market (Locked)</h2>
+        <p>
+          OpsGate launches with <strong>free + Starter tiers</strong> featuring: 
+          <strong>Dashboard MVP</strong> + <strong>SSL Posture Service</strong> + <strong>Security Scan Service</strong>
+        </p>
+        <div style="display: flex; gap: 16px; justify-content: center; margin-top: 24px; flex-wrap: wrap;">
+          <button class="btn-primary" onclick="window.scrollTo({top: document.getElementById('tiers').offsetTop - 80, behavior: 'smooth'})">
+            View Tiers
+          </button>
+          <button class="btn-primary" style="background: transparent; color: var(--text); border: 1px solid var(--line);" 
+                  onclick="window.scrollTo({top: document.getElementById('execution').offsetTop - 80, behavior: 'smooth'})">
+            See Sprint 1 Plan
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Market Analysis -->
+    <section id="problem" class="wrap section">
+      <div class="section-title">
+        <span class="dot"></span>
+        <span>Market Analysis</span>
+      </div>
+      <h2>The WordPress Operational Intelligence Gap</h2>
+      <p class="section-description">
+        Current solutions fail to provide authoritative, real-time operational visibility, forcing site owners 
+        and agencies into reactive positions with fragmented tools and no single source of truth.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Critical Market Pain Points</h3>
+          <p><span class="status-critical strong">Operational Uncertainty</span></p>
+          <p>Operators cannot answer fundamental questions about their WordPress installations with confidence.</p>
+          
+          <p><span class="status-critical strong">Fragmented Visibility</span></p>
+          <p>Security, performance, and availability monitoring exist in separate tools with no unified operational view.</p>
+          
+          <p><span class="status-critical strong">Unprovable Operational Work</span></p>
+          <p>Agencies and maintainers cannot systematically demonstrate proactive work or provide client-proof operational timelines.</p>
+          
+          <p><span class="status-critical strong">Reactive Posture Dominance</span></p>
+          <p>Most tools alert only after failures occur, rather than providing proactive intelligence and trend analysis.</p>
+        </div>
+
+        <div class="card">
+          <h3>Competitive Solution Gaps</h3>
+          <p><span class="strong">Security Scanners & Report Generators:</span> Produce static PDFs rather than live operational dashboards</p>
+          <p><span class="strong">Hosting Provider Dashboards:</span> Limited to infrastructure metrics, ignoring application-layer intelligence</p>
+          <p><span class="strong">Traditional Security Plugins:</span> Focus on prevention mechanisms, lacking operational intelligence</p>
+          <p><span class="strong">Basic Monitoring Tools:</span> Alert on symptoms without providing root cause analysis or trend data</p>
+          <p><span class="strong">Agency Management Tools:</span> Rely on manual reporting with no automated proof-of-work generation</p>
+        </div>
+
+        <div class="card">
+          <h3>Market Opportunity & Segmentation</h3>
+          <p><span class="strong">WordPress Market Share:</span> 43.1% of all websites (W3Techs, 2024)</p>
+          <p><span class="strong">Annual Operational Spend:</span> $200M+ on security and operations tooling</p>
+          <p><span class="strong">Primary Target Segments:</span></p>
+          <ul style="color: var(--muted); margin-top: 12px; padding-left: 20px; line-height: 1.8;">
+            <li><span class="strong">Solo Site Owners</span> (10M+ sites) — Basic visibility needs</li>
+            <li><span class="strong">SMB Operators</span> (500K+ businesses) — Automation and reliability focus</li>
+            <li><span class="strong">Agencies & Professional Maintainers</span> (50K+ providers) — Portfolio management and proof</li>
+          </ul>
+          <p><span class="strong">Solution Gap:</span> No authoritative control plane exists for WordPress operations</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution Architecture -->
+    <section id="solution" class="wrap section">
+      <div class="section-title">
+        <span class="dot"></span>
+        <span>Solution Architecture</span>
+      </div>
+      <h2>The OpsGate Control Plane Architecture</h2>
+      <p class="section-description">
+        A hybrid system where authority resides exclusively in the API layer, WordPress functions as a thin client, 
+        and all operational truth is maintained in a single authoritative database system.
+      </p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Architectural Principles</h3>
+          <p><span class="strong">1. API Authority</span><br>
+          All state changes, data validation, and business logic enforcement occur through the authoritative API layer. The WordPress plugin contains zero authority.</p>
+          
+          <p><span class="strong">2. Database Truth</span><br>
+          PostgreSQL maintains the complete operational state, history, and evidence trail. This serves as the single source of truth for all OpsGate operations.</p>
+          
+          <p><span class="strong">3. Thin Client Pattern</span><br>
+          The WordPress plugin provides UI presentation and local consent storage only. It cannot bypass API validation or enforce business rules.</p>
+          
+          <p><span class="strong">4. Evidence-First Operations</span><br>
+          Every operational action produces verifiable evidence stored in the database, enabling audit trails and proof-of-work generation.</p>
+          
+          <p><span class="strong">5. Dashboard-First User Experience</span><br>
+          All operational intelligence surfaces through the dashboard interface; file exports and reports are secondary utilities.</p>
+        </div>
+
+        <div class="card">
+          <h3>Technical Foundation</h3>
+          <p><span class="strong">API Layer:</span> FastAPI with signed request validation and comprehensive authentication</p>
+          <p><span class="strong">Primary Database:</span> PostgreSQL with complete audit trails and temporal data support</p>
+          <p><span class="strong">WordPress Database:</span> MariaDB/MySQL for WordPress content only (not OpsGate truth)</p>
+          <p><span class="strong">WordPress Integration:</span> Thin plugin with local consent storage and UI presentation</p>
+          <p><span class="strong">Execution Layer:</span> Downstream workers (n8n) for scan execution and data processing</p>
+          <p><span class="strong">Data Flow Architecture:</span> Plugin → API → PostgreSQL → Workers → API → Dashboard</p>
+          <p><span class="strong">Security Framework:</span> Site tokens, request signing, explicit consent for risk-bearing actions</p>
+        </div>
+      </div>
+
+      <!-- NEW: Evidence-First Contract Explicit Definition -->
+      <div class="evidence-callout">
+        <h3>Evidence-First Contract (Explicit Definition)</h3>
+        <p><span class="strong">Every operational run produces three immutable artifacts:</span></p>
+        <div class="grid-3" style="margin-top: 20px;">
+          <div>
+            <h4 style="color: var(--accent); margin-bottom: 12px;">1. JSON Receipt</h4>
+            <p style="color: var(--muted); font-size: 0.95rem;">
+              Complete normalized result data stored in PostgreSQL. Includes inputs, outputs, timestamps, and execution context.
             </p>
-
-            <div class="hero-actions">
-              <button class="btn-primary" id="hero-cta">
-                <span>Start Your 14-Day Pilot</span>
-                <span class="chevron" aria-hidden="true">➜</span>
-              </button>
-              <button class="btn-ghost" id="how-it-works-btn">
-                <svg viewBox="0 0 20 20" aria-hidden="true">
-                  <circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.2" />
-                  <path d="M6 10.2 9 13l5-6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                See How OpsGate Integrates Seamlessly
-              </button>
-            </div>
-
-            <div class="hero-meta">
-              <span><span class="dot"></span> Designed for self-hosted environments</span>
-              <span>✔ Built for WordPress + cPanel/FTP workflows</span>
-              <span>✔ Professional evidence packs for client reporting</span>
-            </div>
+            <p class="mono" style="font-size: 0.85rem; margin-top: 8px;">Table: job_results</p>
           </div>
-
-          <div class="hero-panel fade-in" style="animation-delay: 0.2s;">
-            <div class="hero-panel-inner">
-              <div class="hero-panel-header">
-                <span class="hero-pill">Daily Operations Dashboard · Live Demo</span>
-                <div class="hero-taglist">
-                  <span class="tag">Plugins</span>
-                  <span class="tag">SSL</span>
-                  <span class="tag">Backups</span>
-                  <span class="tag">FTP Security</span>
-                </div>
-              </div>
-
-              <div class="hero-status-grid">
-                <div class="status-card">
-                  <div class="status-label">Plugin & Core Security Scan</div>
-                  <div class="status-value">
-                    <span class="status-pulse" aria-label="Active monitoring"></span>
-                    <span>3 critical updates prevented</span>
-                  </div>
-                  <div class="muted-small">wp-scan_2025-11-07.json</div>
-                </div>
-                <div class="status-card">
-                  <div class="status-label">SSL & Domain Health</div>
-                  <div class="status-value">
-                    <span class="status-badge">All systems optimal</span>
-                    <span class="muted-small">> 30 days remaining</span>
-                  </div>
-                  <div class="muted-small">ops.wpsite.agency → ✅</div>
-                </div>
-                <div class="status-card">
-                  <div class="status-label">Backup Integrity</div>
-                  <div class="status-value">
-                    <span>Last verified backup: <strong>3 hours ago</strong></span>
-                  </div>
-                  <div class="muted-small">wp_full_2025-11-07-103345.tgz</div>
-                </div>
-                <div class="status-card">
-                  <div class="status-label">FTP Upload Monitoring</div>
-                  <div class="status-value">
-                    <span class="status-danger">2 suspicious uploads intercepted</span>
-                  </div>
-                  <div class="muted-small">block-only mode · audit.jsonl</div>
-                </div>
-              </div>
-
-              <div class="hero-timeline">
-                <strong>Next automated step:</strong> Generate pilot evidence pack (MANIFEST.json, professional PDF summary, detailed logs) 
-                ready for client presentation as proof of continuous operational oversight.
-              </div>
-            </div>
+          <div>
+            <h4 style="color: var(--accent2); margin-bottom: 12px;">2. Activity Entry</h4>
+            <p style="color: var(--muted); font-size: 0.95rem;">
+              Human-readable timeline event stored in activity_events table. Used for dashboard display and audit trails.
+            </p>
+            <p class="mono" style="font-size: 0.85rem; margin-top: 8px;">Table: activity_events</p>
+          </div>
+          <div>
+            <h4 style="color: var(--success); margin-bottom: 12px;">3. Artifact Index</h4>
+            <p style="color: var(--muted); font-size: 0.95rem;">
+              Pointer to any generated files (PDF/CSV/XLSX) in object storage. Metadata stored in artifacts table.
+            </p>
+            <p class="mono" style="font-size: 0.85rem; margin-top: 8px;">Table: artifacts</p>
           </div>
         </div>
-      </section>
+        <p style="margin-top: 20px; color: var(--text);">
+          <span class="strong">Contract Rule:</span> No run is considered complete until all three artifacts are persisted and linked.
+        </p>
+      </div>
+    </section>
 
-      <!-- WHO IT'S FOR / PAIN -->
-      <section class="section" aria-labelledby="pain-heading">
-        <div class="section-inner">
-          <div class="section-header">
-            <div class="eyebrow">The Operational Gap</div>
-            <h2 id="pain-heading">Most WordPress Operations Rely on Hope, Not Systems</h2>
-            <p class="muted">
-              Agencies typically patch together separate tools for backups, SSL monitoring, plugin security, 
-              and workflow automation. These solutions rarely communicate, leaving you without a clear audit trail 
-              or client-ready evidence. OpsGate bridges this gap with intelligent orchestration.
-            </p>
-          </div>
+    <!-- Hybrid Architecture Section -->
+    <section id="hybrid" class="wrap section">
+      <div class="section-title">
+        <span class="dot"></span>
+        <span>Hybrid Architecture</span>
+      </div>
+      <h2>Plugin + Web Platform Integration</h2>
+      <p class="section-description">
+        OpsGate employs a deliberate hybrid architecture that combines WordPress plugin installation 
+        with a centralized web platform, enabling both single-site visibility and multi-site portfolio management.
+      </p>
 
-          <div class="grid-3" style="margin-bottom: 22px;">
-            <div class="card fade-in">
-              <div class="chip">
-                <span class="chip-dot"></span>
-                Agencies
-              </div>
-              <div class="card-title">Growing WordPress Agencies</div>
-              <p class="muted">
-                Maintain control over dozens of client sites with daily operational checks that prevent 
-                midnight emergencies and support conversations.
-              </p>
-              <div class="pill-row">
-                <span class="pill-soft"><strong>Business Value:</strong> Package "Ops as a Service"</span>
-                <span class="pill-soft"><strong>Time Savings:</strong> 15+ hours monthly</span>
-              </div>
-            </div>
-
-            <div class="card card-alt fade-in" style="animation-delay: 0.1s;">
-              <div class="chip">
-                <span class="chip-dot"></span>
-                Freelancers
-              </div>
-              <div class="card-title">Independent Developers & Studios</div>
-              <p class="muted">
-                Deliver enterprise-grade operational guardrails without the overhead of a dedicated 
-                DevOps team or platform migration.
-              </p>
-              <div class="pill-row">
-                <span class="pill-soft"><strong>Revenue Opportunity:</strong> Premium care plans</span>
-                <span class="pill-soft"><strong>Client Confidence:</strong> Professional evidence packs</span>
-              </div>
-            </div>
-
-            <div class="card fade-in" style="animation-delay: 0.2s;">
-              <div class="chip">
-                <span class="chip-dot"></span>
-                SMBs
-              </div>
-              <div class="card-title">Security-Conscious Businesses</div>
-              <p class="muted">
-                Get definitive answers about your security posture with concrete logs and reports 
-                suitable for compliance reviews and stakeholder presentations.
-              </p>
-              <div class="pill-row">
-                <span class="pill-soft"><strong>Risk Reduction:</strong> Minimize operational unknowns</span>
-                <span class="pill-soft"><strong>Compliance Ready:</strong> Simplified evidence collection</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card fade-in" style="animation-delay: 0.3s;">
-            <div class="card-title">The Reality of Unmanaged WordPress Operations:</div>
-            <ul class="pain-list">
-              <li>Backups run on schedule...but no one verifies they can actually restore when needed</li>
-              <li>SSL renewals and domain expiry reminders scatter across personal inboxes</li>
-              <li>Plugin vulnerability alerts appear, but there's no tracking of timely resolutions</li>
-              <li>No single source of truth to demonstrate operational diligence to clients or auditors</li>
+      <div class="highlight-box">
+        <h3 style="margin-bottom: 16px;">Why Hybrid Architecture?</h3>
+        <p style="color: var(--text); margin-bottom: 20px;">
+          The hybrid approach addresses distinct user scenarios while maintaining a single authoritative system:
+        </p>
+        <div class="grid-2">
+          <div>
+            <h4 style="color: var(--accent2); margin-bottom: 12px;">WordPress Plugin</h4>
+            <ul style="color: var(--muted); line-height: 1.8; padding-left: 20px;">
+              <li><span class="strong">Primary User:</span> Single site owners and operators</li>
+              <li><span class="strong">Installation:</span> WordPress.org directory distribution</li>
+              <li><span class="strong">Purpose:</span> Site-local dashboard, consent management, immediate visibility</li>
+              <li><span class="strong">Experience:</span> Embedded within wp-admin, contextual to current site</li>
+              <li><span class="strong">Authority:</span> Zero authority – thin client only</li>
             </ul>
-            <p class="muted-small" style="margin-top: 6px;">
-              OpsGate transforms this operational chaos into a streamlined, automated evidence layer 
-              that builds client trust and team confidence.
-            </p>
+          </div>
+          <div>
+            <h4 style="color: var(--accent2); margin-bottom: 12px;">Web Platform</h4>
+            <ul style="color: var(--muted); line-height: 1.8; padding-left: 20px;">
+              <li><span class="strong">Primary User:</span> Agencies, portfolio managers, multi-site operators</li>
+              <li><span class="strong">Access:</span> Browser-based application at opsgate.com</li>
+              <li><span class="strong">Purpose:</span> Multi-site portfolio management, client reporting, team collaboration</li>
+              <li><span class="strong">Experience:</span> Cross-site analytics, bulk operations, proof-of-work generation</li>
+              <li><span class="strong">Authority:</span> Accesses same authoritative API as plugin</li>
+            </ul>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- HOW IT WORKS -->
-      <section class="section" id="how-it-works" aria-labelledby="how-it-works-heading">
-        <div class="section-inner">
-          <div class="section-header">
-            <div class="eyebrow">Our Methodology</div>
-            <h2 id="how-it-works-heading">A Strategic Layer That Elevates Your Existing Stack</h2>
-            <p class="muted">
-              OpsGate integrates a lightweight plugin, intelligent automation engine, and custom MCP server 
-              into a cohesive operational workflow: <strong>monitor → analyze → demonstrate</strong>.
+      <div class="hybrid-visual">
+        <div class="hybrid-column">
+          <div class="card" style="padding: 24px;">
+            <h4 style="color: var(--accent); margin-bottom: 12px;">WordPress Plugin</h4>
+            <p style="font-size: 0.95rem; color: var(--muted); margin-bottom: 16px;">
+              Installed per WordPress site via WordPress.org
             </p>
-          </div>
-
-          <div class="grid-3">
-            <div class="card fade-in">
-              <div class="chip">
-                <span class="chip-dot"></span>
-                Phase 1
-              </div>
-              <div class="card-title">Continuous Monitoring</div>
-              <p class="muted">
-                Scheduled workflows actively monitor your WordPress ecosystem, scanning plugins, 
-                validating SSL certificates, verifying backups, and guarding against suspicious FTP activity.
-              </p>
-              <div class="pill-row">
-                <span class="pill-soft">Scheduled n8n workflows</span>
-                <span class="pill-soft">WPScan / Semgrep integration</span>
-              </div>
-            </div>
-            <div class="card card-alt fade-in" style="animation-delay: 0.1s;">
-              <div class="chip">
-                <span class="chip-dot"></span>
-                Phase 2
-              </div>
-              <div class="card-title">Intelligent Analysis</div>
-              <p class="muted">
-                Operational data flows into our MCP server, where it's normalized into structured JSON manifests 
-                and distilled into executive-ready summaries through AI-assisted analysis.
-              </p>
-              <div class="pill-row">
-                <span class="pill-soft">Structured MANIFEST.json</span>
-                <span class="pill-soft">Executive "ops briefings"</span>
-              </div>
-            </div>
-            <div class="card fade-in" style="animation-delay: 0.2s;">
-              <div class="chip">
-                <span class="chip-dot"></span>
-                Phase 3
-              </div>
-              <div class="card-title">Professional Demonstration</div>
-              <p class="muted">
-                Generate comprehensive security summary PDFs and evidence packages suitable for client presentations, 
-                compliance reviews, or internal quality assurance—delivered on your schedule.
-              </p>
-              <div class="pill-row">
-                <span class="pill-soft">Professional PDF reports</span>
-                <span class="pill-soft">Detailed audit.jsonl logs</span>
-              </div>
+            <ul style="color: var(--muted); font-size: 0.9rem; padding-left: 16px; line-height: 1.6;">
+              <li>Single-site operational dashboard</li>
+              <li>Site-local consent storage</li>
+              <li>Immediate health visibility</li>
+              <li>Manual check initiation</li>
+              <li>Plugin settings management</li>
+            </ul>
+            <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line);">
+              <p class="mono" style="font-size: 0.85rem;">For: free, Starter, Professional tiers</p>
             </div>
           </div>
         </div>
-      </section>
 
-      <!-- FEATURES -->
-      <section class="section" id="features" aria-labelledby="features-heading">
-        <div class="section-inner">
-          <div class="section-header">
-            <div class="eyebrow">Comprehensive Coverage</div>
-            <h2 id="features-heading">Secure Every Critical Aspect of WordPress Operations</h2>
-          </div>
+        <div class="hybrid-connector">
+          <div class="connector-line"></div>
+          <span style="writing-mode: vertical-rl; transform: rotate(180deg);">Shared API Authority</span>
+          <div class="connector-line"></div>
+        </div>
 
-          <div class="grid-2">
-            <div class="card fade-in">
-              <div class="card-title">Plugin & Core Security Intelligence</div>
-              <p class="muted">
-                Automated vulnerability scanning integrated directly with your WordPress infrastructure. 
-                Critical issues are identified, tracked, and documented within comprehensive evidence packages.
-              </p>
-              <ul class="pain-list">
-                <li>Monitor vulnerable plugins across multiple sites simultaneously</li>
-                <li>Document all blocked or patched vulnerabilities with timestamps</li>
-              </ul>
-            </div>
-            <div class="card card-alt fade-in" style="animation-delay: 0.1s;">
-              <div class="card-title">SSL & Domain Health Monitoring</div>
-              <p class="muted">
-                Proactive certificate expiry tracking and DNS configuration monitoring. 
-                OpsGate identifies potential "site down" scenarios before they impact your clients.
-              </p>
-              <ul class="pain-list">
-                <li>Strategic expiry horizon alerts (7, 30, 60-day warnings)</li>
-                <li>Documented verification checks, not just automated pings</li>
-              </ul>
-            </div>
-            <div class="card card-alt fade-in" style="animation-delay: 0.2s;">
-              <div class="card-title">Verified Backup Systems</div>
-              <p class="muted">
-                Move beyond "backups probably run" to documented verification. 
-                OpsGate logs backup creation, storage locations, and basic integrity checks.
-              </p>
-              <ul class="pain-list">
-                <li>Backup catalog systematically recorded in MANIFEST.json</li>
-                <li>Verification summaries included in monthly client reports</li>
-              </ul>
-            </div>
-            <div class="card fade-in" style="animation-delay: 0.3s;">
-              <div class="card-title">FTP Security Guardrails</div>
-              <p class="muted">
-                Monitor file uploads for suspicious patterns and enforce security policies. 
-                Potentially risky files are intercepted and logged with complete contextual details.
-              </p>
-              <ul class="pain-list">
-                <li>"Block-only" mode: deny suspicious uploads while maintaining detailed logs</li>
-                <li>Future enhancement: quarantine review mode for deeper analysis</li>
-              </ul>
+        <div class="hybrid-column">
+          <div class="card" style="padding: 24px;">
+            <h4 style="color: var(--accent2); margin-bottom: 12px;">Web Platform</h4>
+            <p style="font-size: 0.95rem; color: var(--muted); margin-bottom: 16px;">
+              Centralized application at opsgate.com
+            </p>
+            <ul style="color: var(--muted); font-size: 0.9rem; padding-left: 16px; line-height: 1.6;">
+              <li>Multi-site portfolio dashboard</li>
+              <li>Client reporting and summaries</li>
+              <li>Team collaboration features</li>
+              <li>Bulk operations management</li>
+              <li>Agency billing and account management</li>
+            </ul>
+            <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line);">
+              <p class="mono" style="font-size: 0.85rem;">For: Agency tier, team accounts</p>
             </div>
           </div>
+        </div>
+      </div>
 
-          <p class="muted-small fade-in" style="margin-top: 16px; animation-delay: 0.4s;">
-            Designed for technical flexibility, OpsGate operates seamlessly in self-hosted and Docker environments today, 
-            with a clear roadmap toward managed SaaS solutions as your needs evolve.
+      <div class="grid-2" style="margin-top: 40px;">
+        <div class="card">
+          <h3>Shared Architectural Foundation</h3>
+          <p>Both plugin and web platform components consume the same authoritative API and 
+          access the same PostgreSQL database, ensuring consistency across all user experiences.</p>
+          
+          <p><span class="strong">Common API Endpoints:</span> Both interfaces use identical API contracts</p>
+          <p><span class="strong">Shared Authentication:</span> Same token-based authentication system</p>
+          <p><span class="strong">Unified Data Model:</span> Consistent data structures and validation rules</p>
+          <p><span class="strong">Synchronized Entitlements:</span> Feature access controlled centrally via API</p>
+          
+          <p style="margin-top: 20px; color: var(--accent2);" class="mono">
+            Plugin ≠ Web Platform ≠ Authority<br>
+            Plugin + Web Platform → API → PostgreSQL → Truth
           </p>
         </div>
-      </section>
 
-      <!-- PILOT -->
-      <section class="section" id="pilot" aria-labelledby="pilot-heading">
-        <div class="section-inner">
-          <div class="section-header">
-            <div class="eyebrow">Proof Through Practice</div>
-            <h2 id="pilot-heading">Experience OpsGate with Our 14-Day Pilot Program</h2>
-            <p class="muted">
-              Our focused pilot program integrates OpsGate with 3–5 representative sites, collects real operational data, 
-              and delivers a comprehensive evidence package demonstrating tangible value to clients, partners, and your team.
+        <div class="card">
+          <h3>User Journey Mapping</h3>
+          <p><span class="strong">Solo Site Owners:</span> Start with plugin installation → Single-site dashboard → Optional web account creation</p>
+          <p><span class="strong">SMB Operators:</span> Plugin installation → Dashboard usage → Web platform for centralized management</p>
+          <p><span class="strong">Agencies:</span> Web platform signup → Bulk site onboarding → Plugin deployment to client sites</p>
+          
+          <div style="margin-top: 24px; padding: 20px; background: rgba(0,0,0,.2); border-radius: 12px;">
+            <h4 style="color: var(--text); margin-bottom: 12px;">Key Design Principle</h4>
+            <p style="color: var(--muted); font-size: 0.95rem;">
+              The plugin provides immediate, contextual value for single-site operators. 
+              The web platform enables scale, collaboration, and portfolio management. 
+              Both interfaces lead users toward the same operational truth.
             </p>
           </div>
-
-          <div class="pilot-wrap">
-            <div class="timeline fade-in">
-              <div class="timeline-row">
-                <div class="timeline-label">Days 1–3</div>
-                <div class="timeline-body">
-                  <strong>Strategic Implementation & Baseline.</strong> Connect WordPress sites, validate backup pathways, 
-                  confirm SSL configurations, and establish operational benchmarks for comparison.
-                </div>
-              </div>
-              <div class="timeline-row">
-                <div class="timeline-label">Days 4–10</div>
-                <div class="timeline-body">
-                  <strong>Automated Operational Monitoring.</strong> OpsGate operates autonomously, providing internal 
-                  operational briefings while you maintain visibility through detailed logs and dashboards.
-                </div>
-              </div>
-              <div class="timeline-row">
-                <div class="timeline-label">Days 11–14</div>
-                <div class="timeline-body">
-                  <strong>Comprehensive Evidence Package Delivery.</strong> Receive a structured MANIFEST.json, 
-                  professionally formatted ops summary PDF, and implementation guide demonstrating OpsGate's monitoring 
-                  capabilities and identified insights.
-                </div>
-              </div>
-            </div>
-
-            <div class="card card-alt fade-in" style="animation-delay: 0.2s;">
-              <div class="card-title">Your Pilot Deliverables</div>
-              <p class="muted">
-                A complete <code>pilot_pack_*.zip</code> containing:
-              </p>
-              <ul class="pain-list">
-                <li><strong>MANIFEST.json</strong> — machine-readable operational snapshot with detailed scan results</li>
-                <li><strong>Executive Security Summary PDF</strong> — client-ready overview of monitoring outcomes</li>
-                <li><strong>Audit Trail Documentation</strong> — complete references to logs, backups, and security events</li>
-              </ul>
-              <p class="muted">
-                Following the pilot, you'll have everything needed to evaluate expanding OpsGate across your portfolio, 
-                integrating it into agency workflows, or maintaining it as a strategic guardian for mission-critical 
-                WordPress installations.
-              </p>
-              <button class="btn-primary" style="margin-top: 10px;" id="pilot-cta">
-                Request Free Pilot Details
-              </button>
-              <p class="muted-small" style="margin-top: 8px;">
-                Limited pilot slots available each month to ensure dedicated implementation support
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- FAQ -->
-      <section class="section" id="faq" aria-labelledby="faq-heading">
-        <div class="section-inner">
-          <div class="section-header">
-            <div class="eyebrow">Frequently Asked Questions</div>
-            <h2 id="faq-heading">Clear Answers for Real People</h2>
-            <p class="muted">
-              We know you have questions. Here are straightforward answers to what most people ask about OpsGate.
-            </p>
-          </div>
-
-          <div class="faq-item fade-in">
-            <div class="faq-question">How much does the 14 day pilot cost?</div>
-            <div class="faq-answer">
-              <strong>Absolutely nothing.</strong> The 14 day pilot is completely free, with no credit card required and no hidden charges. 
-              We want you to experience OpsGate's value firsthand before making any decisions. After the pilot, 
-              if you love it, we have simple pricing based on how many sites you want to protect.
-            </div>
-          </div>
-
-          <div class="faq-item fade-in" style="animation-delay: 0.1s;">
-            <div class="faq-question">Is OpsGate a cloud service or do I install it myself?</div>
-            <div class="faq-answer">
-              Right now, OpsGate is designed to run on your own server or VPS using Docker (think of it like a self contained app). 
-              We are starting with this approach to make sure it works perfectly for WordPress agencies. 
-              A cloud version where we handle everything for you is coming later once we perfect the system.
-            </div>
-          </div>
-
-          <div class="faq-item fade-in" style="animation-delay: 0.2s;">
-            <div class="faq-question">Will OpsGate mess with my current WordPress hosting?</div>
-            <div class="faq-answer">
-              No changes to your hosting at all. OpsGate works alongside what you already have. It talks to your WordPress, 
-              your FTP/cPanel, and your SSL setup, but it does not force you to move hosts or change platforms.
-            </div>
-          </div>
-
-          <div class="faq-item fade-in" style="animation-delay: 0.3s;">
-            <div class="faq-question">Do I need to be a technical expert to use OpsGate?</div>
-            <div class="faq-answer">
-              Not at all. While OpsGate is powerful, we have made it straightforward to set up. Our pilot includes 
-              step by step guidance, and once running, it works automatically. If you can install a Docker container 
-              (we provide clear instructions), you can run OpsGate.
-            </div>
-          </div>
-
-          <div class="faq-item fade-in" style="animation-delay: 0.4s;">
-            <div class="faq-question">What happens after the 14 day free pilot ends?</div>
-            <div class="faq-answer">
-              You get to keep all the evidence and reports we generated during the pilot. If you decide OpsGate is right for you, 
-              we have simple per site or bundle pricing. If not, you simply stop using it, no questions asked. 
-              There is no automatic billing or tricky cancellation process.
-            </div>
-          </div>
-
-          <div class="faq-item fade-in" style="animation-delay: 0.5s;">
-            <div class="faq-question">Does OpsGate replace my current security plugins?</div>
-            <div class="faq-answer">
-              No, OpsGate works with your existing tools. Think of it as the <strong>coordinator and proof generator</strong>. 
-              You keep using your favorite security plugins; OpsGate ties everything together and gives you one clear story 
-              of what actually happened across all your sites.
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer role="contentinfo">
-      <div class="footer-inner">
-        <span>© <span id="year"></span> OpsGate. Transform WordPress operations from chaotic to controlled.</span>
-        <div class="badge">
-          <span>Operational Excellence</span>
-          <span aria-hidden="true">·</span>
-          <span>Built for growing agencies</span>
         </div>
       </div>
-    </footer>
-  </div>
+    </section>
+
+    <!-- Technical Architecture -->
+    <section id="architecture" class="wrap section">
+      <div class="section-title">
+        <span class="dot"></span>
+        <span>Technical Architecture</span>
+      </div>
+      <h2>System Architecture & Data Flow</h2>
+      <p class="section-description">
+        Clear separation of concerns with single-source truth architecture and downstream execution pattern.
+      </p>
+
+      <div class="arch-flow">
+        <div class="arch-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>WordPress Plugin (Thin Client)</h4>
+            <p>Distributed via WordPress.org. Provides dashboard UI, manages local consent storage, 
+            authenticates to API via site tokens. Contains zero business logic, authority, or operational state.</p>
+            <p class="mono" style="margin-top: 8px;">Database: MariaDB/MySQL (WordPress content only)</p>
+          </div>
+        </div>
+
+        <div class="arch-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Web Platform Interface</h4>
+            <p>Browser-based application for portfolio management, team collaboration, and multi-site operations. 
+            Consumes same API as plugin, provides agency-grade features and reporting capabilities.</p>
+            <p class="mono" style="margin-top: 8px;">Access: Browser-based, multi-site focused</p>
+          </div>
+        </div>
+
+        <div class="arch-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Authoritative API Layer (FastAPI)</h4>
+            <p>Single point of truth for all operations. Validates entitlements, manages job lifecycle, 
+            stores results, enforces business rules. All requests are signed, authenticated, and audited.</p>
+            <p class="mono" style="margin-top: 8px;">Role: Business logic enforcement & state validation</p>
+          </div>
+        </div>
+
+        <div class="arch-step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Authoritative Database (PostgreSQL)</h4>
+            <p>Stores all OpsGate operational truth: site registrations, job definitions, execution results, 
+            evidence artifacts, audit trails, entitlement definitions. Complete temporal history maintained.</p>
+            <p class="mono" style="margin-top: 8px;">Role: Single source of truth for OpsGate state</p>
+          </div>
+        </div>
+
+        <div class="arch-step">
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <h4>Execution Workers (Downstream Processing)</h4>
+            <p>Receive signed job payloads from API, execute scans/checks, return signed results. 
+            Completely invisible to end users—no UI exposure, no direct access, no state persistence.</p>
+            <p class="mono" style="margin-top: 8px;">Pattern: Stateless callback-based execution</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="card">
+        <h3>Database Architecture & Schema Design</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Database System</th>
+                <th>Purpose & Scope</th>
+                <th>Key Tables/Collections</th>
+                <th>Ownership & Authority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="strong">PostgreSQL</span><br><span class="mono">Primary OpsGate Database</span></td>
+                <td>Stores all OpsGate operational truth, evidence, audit trails, and system state</td>
+                <td>sites, entitlements, jobs, job_results, activity_events, audit_logs, artifacts</td>
+                <td><span class="status-success">Authoritative</span><br>Single source of truth</td>
+              </tr>
+              <tr>
+                <td><span class="strong">MariaDB/MySQL</span><br><span class="mono">WordPress Database</span></td>
+                <td>WordPress content, themes, plugins, and local plugin settings only</td>
+                <td>wp_posts, wp_options, wp_users, wp_opsgate_consent</td>
+                <td><span class="status-info">Local Storage</span><br>Not authoritative for OpsGate</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Business Model -->
+    <section id="tiers" class="wrap section">
+      <div class="section-title">
+        <span class="dot"></span>
+        <span>Business Model</span>
+      </div>
+      <h2>Tiered Service Architecture</h2>
+      <p class="section-description">
+        Progressive feature unlocks aligned to customer operational maturity, with clear upgrade 
+        paths driven by specific operational questions and business needs.
+      </p>
+
+      <div class="grid-4">
+        <div class="card tier">
+          <h3>free</h3>
+          <p class="price">$0</p>
+          <p class="price-period">per month</p>
+          <p>Operational visibility foundation</p>
+          <ul style="color: var(--muted); margin-top: 24px; padding-left: 20px; line-height: 1.8;">
+            <li>Manual SSL certificate validation</li>
+            <li>Basic security configuration scanning</li>
+            <li>Dashboard operational view</li>
+            <li>24-hour activity timeline</li>
+            <li>Protection coverage analysis</li>
+          </ul>
+          <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line);">
+            <p class="mono" style="font-size: 0.9rem; color: var(--accent2);">Answers: "What is my current operational status?"</p>
+          </div>
+        </div>
+
+        <div class="card tier highlight">
+          <div class="tier-badge">RECOMMENDED</div>
+          <h3>Starter</h3>
+          <p class="price">$9</p>
+          <p class="price-period">per month / site</p>
+          <p>Automated operational intelligence</p>
+          <ul style="color: var(--muted); margin-top: 24px; padding-left: 20px; line-height: 1.8;">
+            <li>All free tier capabilities</li>
+            <li>Scheduled monitoring and validation</li>
+            <li>Change detection and delta analysis</li>
+            <li>Configurable email alerts</li>
+            <li>90-day operational history</li>
+            <li>Basic trend visualization</li>
+          </ul>
+          <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line);">
+            <p class="mono" style="font-size: 0.9rem; color: var(--accent2);">Answers: "What changed and when did it change?"</p>
+          </div>
+        </div>
+
+        <div class="card tier">
+          <h3>Professional</h3>
+          <p class="price">$29</p>
+          <p class="price-period">per month / site</p>
+          <p>Recovery confidence for revenue operations</p>
+          <ul style="color: var(--muted); margin-top: 24px; padding-left: 20px; line-height: 1.8;">
+            <li>All Starter tier capabilities</li>
+            <li>Automated backup systems</li>
+            <li>Consent-gated restore workflows</li>
+            <li>Advanced malware detection</li>
+            <li>365-day operational history</li>
+            <li>Compliance export capabilities</li>
+          </ul>
+          <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line);">
+            <p class="mono" style="font-size: 0.9rem; color: var(--accent2);">Answers: "Can I recover if something goes wrong?"</p>
+          </div>
+        </div>
+
+        <div class="card tier">
+          <h3>Agency</h3>
+          <p class="price">$99+</p>
+          <p class="price-period">per month</p>
+          <p>Portfolio operations and proof generation</p>
+          <ul style="color: var(--muted); margin-top: 24px; padding-left: 20px; line-height: 1.8;">
+            <li>Multi-site portfolio dashboard</li>
+            <li>Client-safe operational summaries</li>
+            <li>Automated proof-of-work timelines</li>
+            <li>SLA compliance workflows</li>
+            <li>Team collaboration features</li>
+            <li>Volume-based pricing</li>
+          </ul>
+          <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line);">
+            <p class="mono" style="font-size: 0.9rem; color: var(--accent2);">Answers: "Can I prove the value I deliver to clients?"</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="card">
+        <h3>Hybrid Platform Access by Tier</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Tier</th>
+                <th>WordPress Plugin Access</th>
+                <th>Web Platform Access</th>
+                <th>Primary Interface</th>
+                <th>Use Case</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="strong">free</span></td>
+                <td><span class="status-success">Full Access</span><br>Single-site dashboard, manual checks</td>
+                <td><span class="status-warning">Limited</span><br>Account creation, basic profile</td>
+                <td>WordPress Plugin</td>
+                <td>Solo site operators, initial discovery</td>
+              </tr>
+              <tr>
+                <td><span class="strong">Starter</span></td>
+                <td><span class="status-success">Full Access</span><br>Automated monitoring, alerts</td>
+                <td><span class="status-success">Basic Access</span><br>Single-site web dashboard</td>
+                <td>WordPress Plugin<br>+ Web Supplement</td>
+                <td>Growing sites, basic automation</td>
+              </tr>
+              <tr>
+                <td><span class="strong">Professional</span></td>
+                <td><span class="status-success">Full Access</span><br>Advanced features, recovery tools</td>
+                <td><span class="status-success">Enhanced Access</span><br>Multi-site view, basic reporting</td>
+                <td>Dual Interface</td>
+                <td>Revenue-critical sites, recovery focus</td>
+              </tr>
+              <tr>
+                <td><span class="strong">Agency</span></td>
+                <td><span class="status-success">Full Access</span><br>All plugin features</td>
+                <td><span class="status-success">Complete Access</span><br>Portfolio management, team features</td>
+                <td>Web Platform Primary</td>
+                <td>Agencies, multi-site operators</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Execution Plan -->
+    <section id="execution" class="wrap section">
+      <div class="section-title">
+        <span class="dot"></span>
+        <span>Execution Plan</span>
+      </div>
+      <h2>Phased Implementation Strategy</h2>
+      <p class="section-description">
+        ROI-driven delivery focusing on market validation, followed by monetization, then operational 
+        expansion, and finally portfolio-scale capabilities.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Sprint 1: Foundation (2 Weeks)</h3>
+          <p><span class="strong">Focus:</span> Market-ready MVP with core architecture</p>
+          <p><span class="strong">Deliverables:</span></p>
+          <ul style="color: var(--muted); margin-top: 12px; padding-left: 20px; line-height: 1.8;">
+            <li>free tier operational dashboard</li>
+            <li>API authority layer implementation</li>
+            <li>PostgreSQL database schema</li>
+            <li>SSL certificate validation service</li>
+            <li>Security configuration scanning</li>
+            <li>WordPress plugin v1.0</li>
+          </ul>
+          <p style="margin-top: 20px;"><span class="strong">Success Metric:</span> 100+ active installations</p>
+        </div>
+
+        <div class="card">
+          <h3>Sprint 2: Monetization (2 Weeks)</h3>
+          <p><span class="strong">Focus:</span> Starter tier launch and conversion funnel</p>
+          <p><span class="strong">Deliverables:</span></p>
+          <ul style="color: var(--muted); margin-top: 12px; padding-left: 20px; line-height: 1.8;">
+            <li>Starter tier entitlement system</li>
+            <li>Server-side scheduling engine</li>
+            <li>Email alert and notification system</li>
+            <li>Change detection and delta analysis</li>
+            <li>Dashboard upgrade conversion flows</li>
+            <li>Basic web platform foundation</li>
+          </ul>
+          <p style="margin-top: 20px;"><span class="strong">Success Metric:</span> 5% free-to-Starter conversion rate</p>
+        </div>
+
+        <div class="card">
+          <h3>Sprint 3: Expansion (3 Weeks)</h3>
+          <p><span class="strong">Focus:</span> Professional tier and web platform enhancement</p>
+          <p><span class="strong">Deliverables:</span></p>
+          <ul style="color: var(--muted); margin-top: 12px; padding-left: 20px; line-height: 1.8;">
+            <li>Automated backup systems</li>
+            <li>Consent-gated restore workflows</li>
+            <li>Advanced malware detection pipeline</li>
+            <li>Web platform portfolio features</li>
+            <li>Extended history storage system</li>
+            <li>Agency tier foundation</li>
+          </ul>
+          <p style="margin-top: 20px;"><span class="strong">Success Metric:</span> 20% of paid users upgrade to Professional</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW: Quality Assurance Section -->
+    <section id="qa" class="wrap section">
+      <div class="section-title">
+        <span class="dot"></span>
+        <span>Quality Assurance Framework</span>
+      </div>
+      <h2>Comprehensive Testing & Validation Strategy</h2>
+      <p class="section-description">
+        Enterprise-grade testing framework ensuring system reliability, security compliance, 
+        and optimal user experience across all architectural components.
+      </p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Testing Categories & Protocols</h3>
+          
+          <div style="margin-bottom: 24px;">
+            <h4 style="color: var(--critical); margin-bottom: 12px;">Security Testing</h4>
+            <ul style="color: var(--muted); padding-left: 20px; line-height: 1.8;">
+              <li>API authentication and authorization validation</li>
+              <li>Data encryption in transit and at rest verification</li>
+              <li>SQL injection and cross-site scripting prevention testing</li>
+              <li>Cross-site request forgery protection validation</li>
+              <li>Token validation, rotation, and revocation testing</li>
+              <li>Consent mechanism security validation</li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 24px;">
+            <h4 style="color: var(--warning); margin-bottom: 12px;">Integration Testing</h4>
+            <ul style="color: var(--muted); padding-left: 20px; line-height: 1.8;">
+              <li>Plugin-API communication protocol validation</li>
+              <li>API-PostgreSQL data consistency testing</li>
+              <li>Worker callback validation and error recovery testing</li>
+              <li>WordPress version compatibility matrix validation</li>
+              <li>Third-party service integration testing</li>
+              <li>Database migration and schema evolution testing</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 style="color: var(--success); margin-bottom: 12px;">User Experience Testing</h4>
+            <ul style="color: var(--muted); padding-left: 20px; line-height: 1.8;">
+              <li>Dashboard load performance validation (&lt;2s target)</li>
+              <li>Empty state clarity and guidance testing</li>
+              <li>Error message usability and actionability assessment</li>
+              <li>Upgrade flow completion rate optimization</li>
+              <li>Mobile responsiveness and accessibility compliance</li>
+              <li>Cross-browser compatibility validation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Validation Checklist & Success Criteria</h3>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Test Case</th>
+                  <th>Success Criteria</th>
+                  <th>Priority</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>API Authority Enforcement</td>
+                  <td>Plugin cannot bypass API for paid features under any condition</td>
+                  <td><span class="status-critical">Critical</span></td>
+                </tr>
+                <tr>
+                  <td>Database Truth Maintenance</td>
+                  <td>All state changes persist exclusively to PostgreSQL with complete audit trail</td>
+                  <td><span class="status-critical">Critical</span></td>
+                </tr>
+                <tr>
+                  <td>Empty State Truthfulness</td>
+                  <td>Dashboard explicitly indicates "no data available" rather than implying "all good"</td>
+                  <td><span class="status-critical">Critical</span></td>
+                </tr>
+                <tr>
+                  <td>Evidence-First Contract</td>
+                  <td>Every run produces JSON receipt + activity entry + artifact index</td>
+                  <td><span class="status-critical">Critical</span></td>
+                </tr>
+                <tr>
+                  <td>Worker System Isolation</td>
+                  <td>End users have no visibility or access to worker systems or execution details</td>
+                  <td><span class="status-warning">High</span></td>
+                </tr>
+                <tr>
+                  <td>Upgrade Flow Reliability</td>
+                  <td>free → Starter conversion completes successfully with immediate feature access</td>
+                  <td><span class="status-warning">High</span></td>
+                </tr>
+                <tr>
+                  <td>Performance Baseline Compliance</td>
+                  <td>Dashboard loads in &lt;2 seconds with empty cache across all supported browsers</td>
+                  <td><span class="status-info">Medium</span></td>
+                </tr>
+                <tr>
+                  <td>Database Migration Safety</td>
+                  <td>Schema updates execute without data loss or service interruption</td>
+                  <td><span class="status-info">Medium</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="card">
+        <h3>Risk Mitigation & Contingency Planning</h3>
+        <div class="grid-3">
+          <div>
+            <h4 style="color: var(--critical); margin-bottom: 12px;">Technical Risks</h4>
+            <ul style="color: var(--muted); padding-left: 20px; line-height: 1.8;">
+              <li>API scalability under production load</li>
+              <li>PostgreSQL performance degradation</li>
+              <li>Worker failure recovery mechanisms</li>
+              <li>Data loss prevention and recovery</li>
+              <li>Network latency and connectivity issues</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="color: var(--warning); margin-bottom: 12px;">Business Risks</h4>
+            <ul style="color: var(--muted); padding-left: 20px; line-height: 1.8;">
+              <li>Low free-to-paid conversion rates</li>
+              <li>Market adoption timing and competition</li>
+              <li>Competitive response and feature parity</li>
+              <li>Pricing model market acceptance</li>
+              <li>Customer retention and churn rates</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="color: var(--info); margin-bottom: 12px;">Mitigation Actions</h4>
+            <ul style="color: var(--muted); padding-left: 20px; line-height: 1.8;">
+              <li>Progressive scaling architecture implementation</li>
+              <li>Comprehensive monitoring and alerting systems</li>
+              <li>A/B testing for conversion optimization</li>
+              <li>Competitive analysis and feature differentiation</li>
+              <li>Customer feedback integration cycles</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final Approval -->
+    <section class="wrap section">
+      <div class="product-callout">
+        <h2>First Product to Market (Locked)</h2>
+        <p>
+          <strong>Sprint 1 delivers:</strong> OpsGate free + Starter tiers with Dashboard MVP, SSL Posture Service, 
+          and Security Scan Service — built on authoritative API architecture with PostgreSQL truth.
+        </p>
+        <div style="display: flex; gap: 16px; justify-content: center; margin-top: 24px; flex-wrap: wrap;">
+          <button class="btn-primary" onclick="window.scrollTo({top: document.getElementById('tiers').offsetTop - 80, behavior: 'smooth'})">
+            Review Business Model
+          </button>
+          <button class="btn-primary" style="background: var(--success);" 
+                  onclick="alert('Strategic framework approved. Proceed with Sprint 1 execution per defined architecture and timeline.')">
+            Approve Strategic Framework
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-content">
+        <div style="flex: 2;">
+          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+            <div class="logo" style="width: 36px; height: 36px;"></div>
+            <span style="font-weight: 700; font-size: 1.25rem; color: var(--text);">OpsGate Strategic Framework</span>
+          </div>
+          <p style="color: var(--muted); line-height: 1.7; max-width: 600px; margin-bottom: 20px;">
+            This document outlines the complete strategic and technical framework for the OpsGate WordPress Operations Control Plane. 
+            All architecture decisions follow the established principle: 
+            <span class="mono" style="font-size: 0.95rem;">Business Model → API → Data Model → Execution → UI</span>.
+          </p>
+          <p style="color: var(--muted); font-size: 0.9rem;">
+            © 2024 OpsGate. Confidential strategic document for internal review and approval only.
+          </p>
+        </div>
+        <div style="flex: 1;">
+          <h4 style="margin-bottom: 20px; color: var(--text); font-size: 1.125rem;">Document Navigation</h4>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <a href="#problem" style="color: var(--muted); transition: color 0.2s;">Market Analysis</a>
+            <a href="#solution" style="color: var(--muted); transition: color 0.2s;">Solution Architecture</a>
+            <a href="#hybrid" style="color: var(--muted); transition: color 0.2s;">Hybrid Architecture</a>
+            <a href="#architecture" style="color: var(--muted); transition: color 0.2s;">Technical Implementation</a>
+            <a href="#tiers" style="color: var(--muted); transition: color 0.2s;">Business Model</a>
+            <a href="#execution" style="color: var(--muted); transition: color 0.2s;">Execution Plan</a>
+            <a href="#qa" style="color: var(--muted); transition: color 0.2s;">Quality Assurance</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script>
-    // Enhanced JavaScript with performance and accessibility improvements
-    document.addEventListener('DOMContentLoaded', function() {
-      // Set current year
-      document.getElementById('year').textContent = new Date().getFullYear();
-      
-      // Add intersection observer for fade-in animations
-      const fadeElements = document.querySelectorAll('.fade-in');
-      
-      const fadeObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.animationPlayState = 'running';
-            fadeObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      
-      fadeElements.forEach(el => {
-        el.style.animationPlayState = 'paused';
-        fadeObserver.observe(el);
-      });
-      
-      // Smooth scrolling for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        });
-      });
-      
-      // Button click handlers
-      document.getElementById('hero-cta').addEventListener('click', function() {
-        document.getElementById('pilot').scrollIntoView({behavior:'smooth'});
-      });
-      
-      document.getElementById('how-it-works-btn').addEventListener('click', function() {
-        document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'});
-      });
-      
-      document.getElementById('pilot-cta').addEventListener('click', function() {
-        window.location.href = 'mailto:cybereclipseagency@gmail.com?subject=OpsGate%20Free%2014%20Day%20Pilot%20Request&body=Hi%20OpsGate%20team,%0A%0AI%27d%20like%20to%20start%20my%20free%2014-day%20pilot%20program.%20Please%20send%20me%20the%20next%20steps.%0A%0ANumber%20of%20WordPress%20sites%20I%20want%20to%20test%20with:%20%0A%0AThanks!';
-      });
-      
-      document.querySelector('.nav-cta').addEventListener('click', function() {
-        document.getElementById('pilot').scrollIntoView({behavior:'smooth'});
-      });
-      
-      // Add loading state for buttons
-      document.querySelectorAll('.btn-primary, .nav-cta').forEach(button => {
-        button.addEventListener('click', function() {
-          const originalText = this.innerHTML;
-          this.innerHTML = '<span>Processing Your Request...</span>';
-          this.disabled = true;
+    // Enhanced smooth scrolling with offset calculation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          const headerOffset = 100;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
           
-          // Simulate API call - replace with actual implementation
-          setTimeout(() => {
-            this.innerHTML = originalText;
-            this.disabled = false;
-          }, 1500);
-        });
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
       });
     });
+
+    // Navigation active state management
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const scrollPosition = window.scrollY + 120;
+      
+      let currentSectionId = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          currentSectionId = sectionId;
+        }
+      });
+      
+      document.querySelectorAll('.nav-link').forEach(link => {
+        const linkHref = link.getAttribute('href').replace('#', '');
+        if (linkHref === currentSectionId) {
+          link.style.color = 'var(--text)';
+          link.style.background = 'rgba(255,255,255,.05)';
+          link.style.fontWeight = '600';
+        } else {
+          link.style.color = 'var(--muted)';
+          link.style.background = 'transparent';
+          link.style.fontWeight = '500';
+        }
+      });
+    });
+
+    // Initialize navigation state
+    window.dispatchEvent(new Event('scroll'));
   </script>
 </body>
 </html>
