@@ -1,1459 +1,1803 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OpsGate Strategic Framework | WordPress Operations Control Plane</title>
-  <meta name="description" content="Professional strategic framework: Market analysis, technical architecture, and phased execution plan for OpsGate WordPress operations control plane." />
-  
-  <style>
-    :root{
-      --bg: #0a111f;
-      --bg2: #071022;
-      --panel: #0f1a2e;
-      --panel2: #0c172a;
-      --text: #f0f5ff;
-      --muted: #a9b6d6;
-      --line: rgba(255,255,255,.12);
-      --accent: #7c5cff;
-      --accent2: #00d0ff;
-      --critical: #ff4d6d;
-      --warning: #ffcc66;
-      --success: #25d695;
-      --info: #5d8aff;
-
-      --radius: 16px;
-      --shadow: 0 20px 50px rgba(0,0,0,.35);
-      --shadow2: 0 12px 32px rgba(0,0,0,.25);
-      --glow: 0 0 40px rgba(124,92,255,.15);
-
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif;
-      --max: 1200px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--sans);
-      color: var(--text);
-      background:
-        radial-gradient(1000px 700px at 10% 10%, rgba(124,92,255,.2), transparent 50%),
-        radial-gradient(900px 600px at 90% 20%, rgba(0,208,255,.12), transparent 50%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
-      line-height: 1.6;
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .wrap {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* Header */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(10, 17, 31, 0.95);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(16px);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-weight: 700;
-      font-size: 1.25rem;
-    }
-
-    .logo {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: var(--glow);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 4px;
-    }
-
-    .nav-link {
-      padding: 10px 18px;
-      border-radius: 10px;
-      color: var(--muted);
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-
-    .nav-link:hover {
-      background: rgba(255,255,255,.05);
-      color: var(--text);
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 28px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #061022;
-      font-weight: 700;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      font-size: 0.95rem;
-      box-shadow: 0 12px 30px rgba(124,92,255,.25);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 40px rgba(124,92,255,.3);
-    }
-
-    /* Hero */
-    .hero {
-      padding: 100px 0 80px;
-      position: relative;
-    }
-
-    .tagline {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 24px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid var(--line);
-      border-radius: 100px;
-      margin-bottom: 40px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-    }
-
-    h1 {
-      font-size: 3.75rem;
-      line-height: 1.1;
-      margin-bottom: 28px;
-      letter-spacing: -0.02em;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--text) 0%, var(--muted) 100%);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 1.375rem;
-      color: var(--muted);
-      max-width: 800px;
-      margin-bottom: 48px;
-      line-height: 1.7;
-      font-weight: 400;
-    }
-
-    /* Cards & Layout */
-    .section {
-      padding: 100px 0;
-    }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-      color: var(--accent2);
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    h2 {
-      font-size: 2.75rem;
-      margin-bottom: 28px;
-      line-height: 1.2;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-    }
-
-    .section-description {
-      font-size: 1.125rem;
-      color: var(--muted);
-      max-width: 800px;
-      margin-bottom: 56px;
-      line-height: 1.7;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 28px;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
-    .grid-4 {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 28px;
-    }
-
-    .card {
-      background: rgba(255,255,255,.03);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 36px;
-      backdrop-filter: blur(10px);
-      transition: border-color 0.3s ease;
-    }
-
-    .card:hover {
-      border-color: rgba(124,92,255,.3);
-    }
-
-    .card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .card p {
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 20px;
-      font-size: 1rem;
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--line);
-      margin: 60px 0;
-    }
-
-    /* Tables */
-    .table-container {
-      overflow-x: auto;
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.2);
-      margin: 24px 0;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 800px;
-    }
-
-    th {
-      text-align: left;
-      padding: 22px 28px;
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      font-weight: 600;
-      border-bottom: 1px solid var(--line);
-      font-size: 0.95rem;
-    }
-
-    td {
-      padding: 22px 28px;
-      border-bottom: 1px solid var(--line);
-      color: var(--muted);
-      vertical-align: top;
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    /* Architecture Diagram */
-    .arch-flow {
-      display: grid;
-      gap: 20px;
-    }
-
-    .arch-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 28px;
-      padding: 28px;
-      background: rgba(0,0,0,.2);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      transition: transform 0.3s ease;
-    }
-
-    .arch-step:hover {
-      transform: translateX(4px);
-      border-color: rgba(124,92,255,.4);
-    }
-
-    .step-number {
-      width: 52px;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #061022;
-      border-radius: 14px;
-      font-weight: 800;
-      font-size: 1.375rem;
-      flex-shrink: 0;
-    }
-
-    .step-content {
-      flex: 1;
-    }
-
-    .step-content h4 {
-      font-size: 1.25rem;
-      margin-bottom: 12px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .step-content p {
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.7;
-    }
-
-    /* Tiers */
-    .tier {
-      position: relative;
-      transition: transform 0.3s ease;
-    }
-
-    .tier:hover {
-      transform: translateY(-8px);
-    }
-
-    .tier.highlight {
-      border-color: rgba(124,92,255,.5);
-      box-shadow: var(--glow);
-    }
-
-    .tier-badge {
-      position: absolute;
-      top: 20px;
-      right: -24px;
-      transform: rotate(45deg);
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #061022;
-      padding: 10px 48px;
-      font-size: 0.875rem;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-    }
-
-    .price {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin: 28px 0 8px;
-      color: var(--text);
-    }
-
-    .price-period {
-      color: var(--muted);
-      font-size: 0.95rem;
-      font-weight: 500;
-    }
-
-    /* Status Indicators */
-    .status-critical { color: var(--critical); }
-    .status-warning { color: var(--warning); }
-    .status-success { color: var(--success); }
-    .status-info { color: var(--info); }
-
-    /* Hybrid Architecture Visualization */
-    .hybrid-visual {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 40px;
-      align-items: center;
-      margin: 40px 0;
-      padding: 40px;
-      background: rgba(0,0,0,.2);
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-    }
-
-    .hybrid-column {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .hybrid-connector {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      color: var(--accent2);
-      font-weight: 600;
-    }
-
-    .connector-line {
-      width: 2px;
-      height: 100px;
-      background: linear-gradient(to bottom, var(--accent), var(--accent2));
-    }
-
-    /* Evidence-First Callout */
-    .evidence-callout {
-      background: linear-gradient(135deg, rgba(37,214,149,.1), rgba(124,92,255,.05));
-      border: 1px solid rgba(37,214,149,.3);
-      border-radius: var(--radius);
-      padding: 32px;
-      margin: 40px 0;
-    }
-
-    .evidence-callout h3 {
-      color: var(--success);
-      margin-bottom: 20px;
-    }
-
-    /* Product to Market Callout */
-    .product-callout {
-      background: linear-gradient(135deg, rgba(124,92,255,.1), rgba(0,208,255,.05));
-      border: 1px solid rgba(124,92,255,.3);
-      border-radius: var(--radius);
-      padding: 40px;
-      margin: 40px 0;
-      text-align: center;
-    }
-
-    .product-callout h2 {
-      margin-bottom: 16px;
-      color: var(--text);
-    }
-
-    .product-callout p {
-      color: var(--muted);
-      max-width: 600px;
-      margin: 0 auto 24px;
-      font-size: 1.125rem;
-    }
-
-    /* Footer */
-    footer {
-      padding: 80px 0;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      background: rgba(0,0,0,.2);
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 60px;
-    }
-
-    /* Responsive */
-    @media (max-width: 1200px) {
-      .grid-3, .grid-4 {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .hybrid-visual {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-      
-      .hybrid-connector {
-        display: none;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .grid-2, .grid-3, .grid-4 {
-        grid-template-columns: 1fr;
-      }
-      
-      .nav-links {
-        display: none;
-      }
-      
-      h1 {
-        font-size: 2.75rem;
-      }
-      
-      h2 {
-        font-size: 2.25rem;
-      }
-      
-      .hero {
-        padding: 80px 0 60px;
-      }
-      
-      .section {
-        padding: 80px 0;
-      }
-      
-      .card {
-        padding: 28px;
-      }
-      
-      .footer-content {
-        flex-direction: column;
-        gap: 40px;
-      }
-    }
-
-    /* Utility Classes */
-    .text-gradient {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .mono {
-      font-family: var(--mono);
-      font-size: 0.9em;
-      color: var(--accent2);
-    }
-
-    .strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-    
-    .highlight-box {
-      background: linear-gradient(135deg, rgba(124,92,255,.1), rgba(0,208,255,.05));
-      border: 1px solid rgba(124,92,255,.3);
-      border-radius: var(--radius);
-      padding: 32px;
-      margin: 32px 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPSGATE: WordPress Agency Operating System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #0a2463;
+            --primary-blue: #1e3a8a;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+            --gray-dark: #374151;
+            --gray-medium: #6b7280;
+            --gray-light: #f3f4f6;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #f9fafb;
+            color: var(--gray-dark);
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .document-header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            border-bottom: 5px solid var(--accent-green);
+        }
+
+        .document-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .document-header .subtitle {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            margin-bottom: 18px;
+        }
+
+        .meta-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-top: 16px;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            min-width: 160px;
+        }
+
+        .meta-label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-bottom: 4px;
+        }
+
+        .meta-value {
+            font-weight: 600;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background-color: var(--accent-green);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        /* Top Nav */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .top-nav .container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 12px 20px;
+            overflow-x: auto;
+        }
+
+        .top-nav a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            padding: 8px 10px;
+            border-radius: 999px;
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+        }
+
+        .top-nav a:hover {
+            background: #dbeafe;
+        }
+
+        /* Sections */
+        section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        section h2 {
+            color: var(--primary-dark);
+            font-size: 1.8rem;
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--gray-light);
+            position: relative;
+        }
+
+        section h2:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background-color: var(--accent-green);
+        }
+
+        section h3 {
+            color: var(--primary-blue);
+            font-size: 1.35rem;
+            margin: 22px 0 12px;
+        }
+
+        section h4 {
+            color: var(--gray-dark);
+            font-size: 1.1rem;
+            margin: 18px 0 10px;
+        }
+
+        .subtle {
+            color: var(--gray-medium);
+            font-size: 0.95rem;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 18px 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        th {
+            background-color: var(--primary-dark);
+            color: white;
+            text-align: left;
+            padding: 14px 16px;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--gray-light);
+            vertical-align: top;
+            font-size: 0.95rem;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        tr:hover {
+            background-color: #f0f7ff;
+        }
+
+        /* Cards / grids */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: var(--border-radius);
+            padding: 18px;
+        }
+
+        .card strong {
+            color: var(--gray-dark);
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--gray-dark);
+        }
+
+        .pill.green { background: #ecfdf5; border-color: #a7f3d0; color: #065f46; }
+        .pill.blue { background: #eff6ff; border-color: #bfdbfe; color: #1e3a8a; }
+        .pill.amber { background: #fffbeb; border-color: #fcd34d; color: #92400e; }
+        .pill.red { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+
+        /* Tiers */
+        .tiers-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 22px;
+            margin-top: 10px;
+        }
+
+        .tier-card {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease;
+            border: 1px solid #e5e7eb;
+            background: white;
+        }
+
+        .tier-card:hover { transform: translateY(-4px); }
+
+        .tier-header {
+            padding: 22px;
+            color: white;
+            text-align: center;
+        }
+
+        .tier-free .tier-header { background-color: var(--gray-medium); }
+        .tier-starter .tier-header { background-color: var(--primary-blue); }
+        .tier-pro .tier-header { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
+        .tier-agency .tier-header { background: linear-gradient(135deg, #0e7490 0%, #0891b2 100%); }
+
+        .tier-name { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
+        .tier-price { font-size: 2.1rem; font-weight: 900; }
+        .tier-period { font-size: 1rem; opacity: 0.9; }
+
+        .tier-body { padding: 22px; }
+
+        .tier-feature {
+            margin-bottom: 10px;
+            padding-left: 10px;
+            border-left: 3px solid var(--gray-light);
+            font-size: 0.95rem;
+        }
+
+        .tier-feature.highlight { border-left-color: var(--accent-green); font-weight: 700; }
+
+        /* Lists */
+        ul, ol {
+            padding-left: 22px;
+            margin-bottom: 14px;
+        }
+
+        li { margin-bottom: 8px; }
+
+        .check-list { list-style: none; padding-left: 0; }
+        .check-list li { margin-bottom: 10px; }
+        .check-list li:before { content: '✓'; color: var(--accent-green); font-weight: 900; margin-right: 10px; }
+
+        .x-list { list-style: none; padding-left: 0; }
+        .x-list li { margin-bottom: 10px; }
+        .x-list li:before { content: '✗'; color: var(--accent-red); font-weight: 900; margin-right: 10px; }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 22px 0;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: var(--primary-blue);
+        }
+
+        .phase {
+            position: relative;
+            margin-bottom: 26px;
+        }
+
+        .phase:before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: var(--accent-green);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary-blue);
+        }
+
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .phase-title { font-size: 1.2rem; font-weight: 900; color: var(--primary-dark); }
+        .phase-duration { background-color: var(--gray-light); padding: 5px 12px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; }
+
+        /* Code blocks */
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 18px;
+            border-radius: var(--border-radius);
+            font-family: 'Courier New', monospace;
+            font-size: 0.93rem;
+            margin: 14px 0;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .code-comment { color: #94a3b8; }
+
+        /* Toggle demo */
+        .toggle-example {
+            background-color: #f8fafc;
+            border-radius: var(--border-radius);
+            padding: 18px;
+            margin: 16px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .toggle-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            margin-bottom: 12px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #d1d5db;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px; width: 22px;
+            left: 4px; bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider { background-color: var(--accent-green); }
+        input:checked + .toggle-slider:before { transform: translateX(30px); }
+
+        /* Highlight boxes */
+        .callout {
+            padding: 16px;
+            border-radius: var(--border-radius);
+            margin: 16px 0;
+            border-left: 5px solid var(--primary-blue);
+            background: #f0f9ff;
+        }
+
+        .callout strong { color: var(--primary-dark); }
+
+        .callout.amber { background: #fffbeb; border-left-color: var(--accent-amber); }
+        .callout.green { background: #f0fdf4; border-left-color: var(--accent-green); }
+        .callout.red { background: #fef2f2; border-left-color: var(--accent-red); }
+
+        /* Footer */
+        .document-footer {
+            text-align: center;
+            margin-top: 36px;
+            padding-top: 26px;
+            border-top: 1px solid var(--gray-light);
+            color: var(--gray-medium);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .document-header h1 { font-size: 2rem; }
+            section { padding: 20px; }
+            .tiers-container { grid-template-columns: 1fr; }
+            .meta-info { flex-direction: column; gap: 10px; }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <nav class="nav">
-        <div class="brand">
-          <div class="logo"></div>
-          <span>OpsGate</span>
-        </div>
-        <div class="nav-links">
-          <a href="#problem" class="nav-link">Market Analysis</a>
-          <a href="#solution" class="nav-link">Solution</a>
-          <a href="#hybrid" class="nav-link">Hybrid Architecture</a>
-          <a href="#architecture" class="nav-link">Technical Architecture</a>
-          <a href="#tiers" class="nav-link">Business Model</a>
-          <a href="#execution" class="nav-link">Execution</a>
-          <a href="#qa" class="nav-link">QA</a>
-        </div>
-        <button class="btn-primary" onclick="window.scrollTo({top: document.getElementById('tiers').offsetTop - 80, behavior: 'smooth'})">
-          View Business Model
-        </button>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <!-- Hero -->
-    <section class="hero wrap">
-      <div class="tagline">
-        <span class="dot"></span>
-        <span>STRATEGIC FRAMEWORK — CONFIDENTIAL</span>
-      </div>
-      <h1>OpsGate: WordPress Operations Control Plane</h1>
-      <p class="hero-subtitle">
-        A professional framework for implementing an authoritative control plane for WordPress site operations. 
-        This document outlines the market opportunity, technical architecture, business model, 
-        and phased execution strategy for a dashboard-first operational intelligence platform.
-      </p>
-      <div class="divider"></div>
-      <div class="grid-2">
-        <div class="card">
-          <h3>Executive Summary</h3>
-          <p>
-            OpsGate addresses the critical operational visibility gap in the WordPress ecosystem by establishing 
-            a single source of truth for site health, security posture, and change management. Unlike fragmented 
-            tools that generate static reports, OpsGate delivers real-time, actionable intelligence through 
-            an authoritative, dashboard-first control plane.
-          </p>
-          <p><span class="strong">Market Position:</span> Authoritative control plane, not another scanner</p>
-          <p><span class="strong">Core Architecture:</span> API-authoritative with WordPress thin client pattern</p>
-          <p><span class="strong">Business Model:</span> Tiered SaaS aligned to operational maturity levels</p>
-        </div>
-        <div class="card">
-          <h3>Core Architectural Principle</h3>
-          <p class="mono" style="font-size: 1.1rem; margin-bottom: 24px;">
-            Business Model → API → Data Model → Execution → UI
-          </p>
-          <ul style="color: var(--muted); line-height: 1.8; padding-left: 20px;">
-            <li><span class="strong">Hybrid Architecture:</span> WordPress plugin + Web platform integration</li>
-            <li><span class="strong">Dashboard-First Product Experience</span> — Intelligence surfaces through UI, not files</li>
-            <li><span class="strong">Single Authoritative API</span> — All state changes validated through API</li>
-            <li><span class="strong">Evidence-Based Operational Intelligence</span> — Every action produces verifiable evidence</li>
-            <li><span class="strong">Agency-Grade Proof-of-Work Systems</span> — Automated client reporting and compliance</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- NEW: First Product to Market Callout -->
-    <section class="wrap">
-      <div class="product-callout">
-        <h2>First Product to Market (Locked)</h2>
-        <p>
-          OpsGate launches with <strong>free + Starter tiers</strong> featuring: 
-          <strong>Dashboard MVP</strong> + <strong>SSL Posture Service</strong> + <strong>Security Scan Service</strong>
-        </p>
-        <div style="display: flex; gap: 16px; justify-content: center; margin-top: 24px; flex-wrap: wrap;">
-          <button class="btn-primary" onclick="window.scrollTo({top: document.getElementById('tiers').offsetTop - 80, behavior: 'smooth'})">
-            View Tiers
-          </button>
-          <button class="btn-primary" style="background: transparent; color: var(--text); border: 1px solid var(--line);" 
-                  onclick="window.scrollTo({top: document.getElementById('execution').offsetTop - 80, behavior: 'smooth'})">
-            See Sprint 1 Plan
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Market Analysis -->
-    <section id="problem" class="wrap section">
-      <div class="section-title">
-        <span class="dot"></span>
-        <span>Market Analysis</span>
-      </div>
-      <h2>The WordPress Operational Intelligence Gap</h2>
-      <p class="section-description">
-        Current solutions fail to provide authoritative, real-time operational visibility, forcing site owners 
-        and agencies into reactive positions with fragmented tools and no single source of truth.
-      </p>
-
-      <div class="grid-3">
-        <div class="card">
-          <h3>Critical Market Pain Points</h3>
-          <p><span class="status-critical strong">Operational Uncertainty</span></p>
-          <p>Operators cannot answer fundamental questions about their WordPress installations with confidence.</p>
-          
-          <p><span class="status-critical strong">Fragmented Visibility</span></p>
-          <p>Security, performance, and availability monitoring exist in separate tools with no unified operational view.</p>
-          
-          <p><span class="status-critical strong">Unprovable Operational Work</span></p>
-          <p>Agencies and maintainers cannot systematically demonstrate proactive work or provide client-proof operational timelines.</p>
-          
-          <p><span class="status-critical strong">Reactive Posture Dominance</span></p>
-          <p>Most tools alert only after failures occur, rather than providing proactive intelligence and trend analysis.</p>
-        </div>
-
-        <div class="card">
-          <h3>Competitive Solution Gaps</h3>
-          <p><span class="strong">Security Scanners & Report Generators:</span> Produce static PDFs rather than live operational dashboards</p>
-          <p><span class="strong">Hosting Provider Dashboards:</span> Limited to infrastructure metrics, ignoring application-layer intelligence</p>
-          <p><span class="strong">Traditional Security Plugins:</span> Focus on prevention mechanisms, lacking operational intelligence</p>
-          <p><span class="strong">Basic Monitoring Tools:</span> Alert on symptoms without providing root cause analysis or trend data</p>
-          <p><span class="strong">Agency Management Tools:</span> Rely on manual reporting with no automated proof-of-work generation</p>
-        </div>
-
-        <div class="card">
-          <h3>Market Opportunity & Segmentation</h3>
-          <p><span class="strong">WordPress Market Share:</span> 43.1% of all websites (W3Techs, 2024)</p>
-          <p><span class="strong">Annual Operational Spend:</span> $200M+ on security and operations tooling</p>
-          <p><span class="strong">Primary Target Segments:</span></p>
-          <ul style="color: var(--muted); margin-top: 12px; padding-left: 20px; line-height: 1.8;">
-            <li><span class="strong">Solo Site Owners</span> (10M+ sites) — Basic visibility needs</li>
-            <li><span class="strong">SMB Operators</span> (500K+ businesses) — Automation and reliability focus</li>
-            <li><span class="strong">Agencies & Professional Maintainers</span> (50K+ providers) — Portfolio management and proof</li>
-          </ul>
-          <p><span class="strong">Solution Gap:</span> No authoritative control plane exists for WordPress operations</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Solution Architecture -->
-    <section id="solution" class="wrap section">
-      <div class="section-title">
-        <span class="dot"></span>
-        <span>Solution Architecture</span>
-      </div>
-      <h2>The OpsGate Control Plane Architecture</h2>
-      <p class="section-description">
-        A hybrid system where authority resides exclusively in the API layer, WordPress functions as a thin client, 
-        and all operational truth is maintained in a single authoritative database system.
-      </p>
-
-      <div class="grid-2">
-        <div class="card">
-          <h3>Architectural Principles</h3>
-          <p><span class="strong">1. API Authority</span><br>
-          All state changes, data validation, and business logic enforcement occur through the authoritative API layer. The WordPress plugin contains zero authority.</p>
-          
-          <p><span class="strong">2. Database Truth</span><br>
-          PostgreSQL maintains the complete operational state, history, and evidence trail. This serves as the single source of truth for all OpsGate operations.</p>
-          
-          <p><span class="strong">3. Thin Client Pattern</span><br>
-          The WordPress plugin provides UI presentation and local consent storage only. It cannot bypass API validation or enforce business rules.</p>
-          
-          <p><span class="strong">4. Evidence-First Operations</span><br>
-          Every operational action produces verifiable evidence stored in the database, enabling audit trails and proof-of-work generation.</p>
-          
-          <p><span class="strong">5. Dashboard-First User Experience</span><br>
-          All operational intelligence surfaces through the dashboard interface; file exports and reports are secondary utilities.</p>
-        </div>
-
-        <div class="card">
-          <h3>Technical Foundation</h3>
-          <p><span class="strong">API Layer:</span> FastAPI with signed request validation and comprehensive authentication</p>
-          <p><span class="strong">Primary Database:</span> PostgreSQL with complete audit trails and temporal data support</p>
-          <p><span class="strong">WordPress Database:</span> MariaDB/MySQL for WordPress content only (not OpsGate truth)</p>
-          <p><span class="strong">WordPress Integration:</span> Thin plugin with local consent storage and UI presentation</p>
-          <p><span class="strong">Execution Layer:</span> Downstream workers (n8n) for scan execution and data processing</p>
-          <p><span class="strong">Data Flow Architecture:</span> Plugin → API → PostgreSQL → Workers → API → Dashboard</p>
-          <p><span class="strong">Security Framework:</span> Site tokens, request signing, explicit consent for risk-bearing actions</p>
-        </div>
-      </div>
-
-      <!-- NEW: Evidence-First Contract Explicit Definition -->
-      <div class="evidence-callout">
-        <h3>Evidence-First Contract (Explicit Definition)</h3>
-        <p><span class="strong">Every operational run produces three immutable artifacts:</span></p>
-        <div class="grid-3" style="margin-top: 20px;">
-          <div>
-            <h4 style="color: var(--accent); margin-bottom: 12px;">1. JSON Receipt</h4>
-            <p style="color: var(--muted); font-size: 0.95rem;">
-              Complete normalized result data stored in PostgreSQL. Includes inputs, outputs, timestamps, and execution context.
-            </p>
-            <p class="mono" style="font-size: 0.85rem; margin-top: 8px;">Table: job_results</p>
-          </div>
-          <div>
-            <h4 style="color: var(--accent2); margin-bottom: 12px;">2. Activity Entry</h4>
-            <p style="color: var(--muted); font-size: 0.95rem;">
-              Human-readable timeline event stored in activity_events table. Used for dashboard display and audit trails.
-            </p>
-            <p class="mono" style="font-size: 0.85rem; margin-top: 8px;">Table: activity_events</p>
-          </div>
-          <div>
-            <h4 style="color: var(--success); margin-bottom: 12px;">3. Artifact Index</h4>
-            <p style="color: var(--muted); font-size: 0.95rem;">
-              Pointer to any generated files (PDF/CSV/XLSX) in object storage. Metadata stored in artifacts table.
-            </p>
-            <p class="mono" style="font-size: 0.85rem; margin-top: 8px;">Table: artifacts</p>
-          </div>
-        </div>
-        <p style="margin-top: 20px; color: var(--text);">
-          <span class="strong">Contract Rule:</span> No run is considered complete until all three artifacts are persisted and linked.
-        </p>
-      </div>
-    </section>
-
-    <!-- Hybrid Architecture Section -->
-    <section id="hybrid" class="wrap section">
-      <div class="section-title">
-        <span class="dot"></span>
-        <span>Hybrid Architecture</span>
-      </div>
-      <h2>Plugin + Web Platform Integration</h2>
-      <p class="section-description">
-        OpsGate employs a deliberate hybrid architecture that combines WordPress plugin installation 
-        with a centralized web platform, enabling both single-site visibility and multi-site portfolio management.
-      </p>
-
-      <div class="highlight-box">
-        <h3 style="margin-bottom: 16px;">Why Hybrid Architecture?</h3>
-        <p style="color: var(--text); margin-bottom: 20px;">
-          The hybrid approach addresses distinct user scenarios while maintaining a single authoritative system:
-        </p>
-        <div class="grid-2">
-          <div>
-            <h4 style="color: var(--accent2); margin-bottom: 12px;">WordPress Plugin</h4>
-            <ul style="color: var(--muted); line-height: 1.8; padding-left: 20px;">
-              <li><span class="strong">Primary User:</span> Single site owners and operators</li>
-              <li><span class="strong">Installation:</span> WordPress.org directory distribution</li>
-              <li><span class="strong">Purpose:</span> Site-local dashboard, consent management, immediate visibility</li>
-              <li><span class="strong">Experience:</span> Embedded within wp-admin, contextual to current site</li>
-              <li><span class="strong">Authority:</span> Zero authority – thin client only</li>
-            </ul>
-          </div>
-          <div>
-            <h4 style="color: var(--accent2); margin-bottom: 12px;">Web Platform</h4>
-            <ul style="color: var(--muted); line-height: 1.8; padding-left: 20px;">
-              <li><span class="strong">Primary User:</span> Agencies, portfolio managers, multi-site operators</li>
-              <li><span class="strong">Access:</span> Browser-based application at opsgate.com</li>
-              <li><span class="strong">Purpose:</span> Multi-site portfolio management, client reporting, team collaboration</li>
-              <li><span class="strong">Experience:</span> Cross-site analytics, bulk operations, proof-of-work generation</li>
-              <li><span class="strong">Authority:</span> Accesses same authoritative API as plugin</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="hybrid-visual">
-        <div class="hybrid-column">
-          <div class="card" style="padding: 24px;">
-            <h4 style="color: var(--accent); margin-bottom: 12px;">WordPress Plugin</h4>
-            <p style="font-size: 0.95rem; color: var(--muted); margin-bottom: 16px;">
-              Installed per WordPress site via WordPress.org
-            </p>
-            <ul style="color: var(--muted); font-size: 0.9rem; padding-left: 16px; line-height: 1.6;">
-              <li>Single-site operational dashboard</li>
-              <li>Site-local consent storage</li>
-              <li>Immediate health visibility</li>
-              <li>Manual check initiation</li>
-              <li>Plugin settings management</li>
-            </ul>
-            <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line);">
-              <p class="mono" style="font-size: 0.85rem;">For: free, Starter, Professional tiers</p>
+    <header class="document-header">
+        <div class="container">
+            <h1>OPSGATE: WORDPRESS AGENCY OPERATING SYSTEM</h1>
+            <div class="subtitle">Consolidate WordPress agency tool chaos into one toggleable operating system</div>
+            <div class="meta-info">
+                <div class="meta-item">
+                    <span class="meta-label">VERSION</span>
+                    <span class="meta-value">6.1 • <span class="status-badge">EXECUTION-READY PLAN</span></span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">AUDIENCE</span>
+                    <span class="meta-value">WordPress Agencies</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">TIMEFRAME</span>
+                    <span class="meta-value">6 Months</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">STACK</span>
+                    <span class="meta-value">Single VPS • Docker • Caddy • PostgreSQL • FastAPI • n8n • WP Plugin • Web Dashboard</span>
+                </div>
             </div>
-          </div>
         </div>
+    </header>
 
-        <div class="hybrid-connector">
-          <div class="connector-line"></div>
-          <span style="writing-mode: vertical-rl; transform: rotate(180deg);">Shared API Authority</span>
-          <div class="connector-line"></div>
+    <nav class="top-nav">
+        <div class="container">
+            <a href="#what-is-opsgate"><i class="fa-solid fa-compass"></i> What It Is</a>
+            <a href="#authority-law"><i class="fa-solid fa-gavel"></i> Authority Law</a>
+            <a href="#business-model"><i class="fa-solid fa-tags"></i> Business Model</a>
+            <a href="#journeys"><i class="fa-solid fa-route"></i> Journeys</a>
+            <a href="#branding"><i class="fa-solid fa-palette"></i> Branding & Funnels</a>
+            <a href="#prioritization"><i class="fa-solid fa-list-check"></i> Prioritization</a>
+            <a href="#functional-spec"><i class="fa-solid fa-gear"></i> Functional Spec</a>
+            <a href="#test-cases"><i class="fa-solid fa-vial"></i> Test Cases</a>
+            <a href="#tech-wireframes"><i class="fa-solid fa-code"></i> Technical Wireframes</a>
+            <a href="#scrum-plan"><i class="fa-solid fa-calendar-check"></i> 6-Month Scrum</a>
+            <a href="#metrics"><i class="fa-solid fa-chart-line"></i> Metrics</a>
+            <a href="#execution"><i class="fa-solid fa-terminal"></i> Execution</a>
         </div>
+    </nav>
 
-        <div class="hybrid-column">
-          <div class="card" style="padding: 24px;">
-            <h4 style="color: var(--accent2); margin-bottom: 12px;">Web Platform</h4>
-            <p style="font-size: 0.95rem; color: var(--muted); margin-bottom: 16px;">
-              Centralized application at opsgate.com
-            </p>
-            <ul style="color: var(--muted); font-size: 0.9rem; padding-left: 16px; line-height: 1.6;">
-              <li>Multi-site portfolio dashboard</li>
-              <li>Client reporting and summaries</li>
-              <li>Team collaboration features</li>
-              <li>Bulk operations management</li>
-              <li>Agency billing and account management</li>
-            </ul>
-            <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line);">
-              <p class="mono" style="font-size: 0.85rem;">For: Agency tier, team accounts</p>
+    <main class="container">
+
+        <!-- 1. What OpsGate is -->
+        <section id="what-is-opsgate">
+            <h2>1. WHAT OPSGATE IS & IS NOT</h2>
+
+            <div class="grid-2" style="margin-bottom: 10px;">
+                <div>
+                    <h3>OpsGate IS NOT:</h3>
+                    <ul class="x-list">
+                        <li><strong>Hosting</strong> — We don’t serve web pages or provide server infrastructure</li>
+                        <li><strong>Task Assistant / Secretary</strong> — We don’t “help,” suggest, or decide</li>
+                        <li><strong>Generic Automation Tool</strong> — We don’t automate random business processes</li>
+                        <li><strong>Cost-Saving Pitch First</strong> — Savings are a byproduct, not the primary promise</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>OpsGate IS:</h3>
+                    <ul class="check-list">
+                        <li><strong>WordPress Agency Operating System</strong> — The control plane for agency operations</li>
+                        <li><strong>Consolidation Layer</strong> — Replaces fragmented tools with one system</li>
+                        <li><strong>Control-First Platform</strong> — Nothing runs without explicit permission</li>
+                        <li><strong>Toggle-Based Automation</strong> — Optional, scoped, auditable</li>
+                        <li><strong>Evidence-First System</strong> — Every action leaves immutable proof</li>
+                        <li><strong>AI for Explanation Only</strong> — Summarization/reporting/explanation; never execution</li>
+                    </ul>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="grid-2" style="margin-top: 40px;">
-        <div class="card">
-          <h3>Shared Architectural Foundation</h3>
-          <p>Both plugin and web platform components consume the same authoritative API and 
-          access the same PostgreSQL database, ensuring consistency across all user experiences.</p>
-          
-          <p><span class="strong">Common API Endpoints:</span> Both interfaces use identical API contracts</p>
-          <p><span class="strong">Shared Authentication:</span> Same token-based authentication system</p>
-          <p><span class="strong">Unified Data Model:</span> Consistent data structures and validation rules</p>
-          <p><span class="strong">Synchronized Entitlements:</span> Feature access controlled centrally via API</p>
-          
-          <p style="margin-top: 20px; color: var(--accent2);" class="mono">
-            Plugin ≠ Web Platform ≠ Authority<br>
-            Plugin + Web Platform → API → PostgreSQL → Truth
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>User Journey Mapping</h3>
-          <p><span class="strong">Solo Site Owners:</span> Start with plugin installation → Single-site dashboard → Optional web account creation</p>
-          <p><span class="strong">SMB Operators:</span> Plugin installation → Dashboard usage → Web platform for centralized management</p>
-          <p><span class="strong">Agencies:</span> Web platform signup → Bulk site onboarding → Plugin deployment to client sites</p>
-          
-          <div style="margin-top: 24px; padding: 20px; background: rgba(0,0,0,.2); border-radius: 12px;">
-            <h4 style="color: var(--text); margin-bottom: 12px;">Key Design Principle</h4>
-            <p style="color: var(--muted); font-size: 0.95rem;">
-              The plugin provides immediate, contextual value for single-site operators. 
-              The web platform enables scale, collaboration, and portfolio management. 
-              Both interfaces lead users toward the same operational truth.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Technical Architecture -->
-    <section id="architecture" class="wrap section">
-      <div class="section-title">
-        <span class="dot"></span>
-        <span>Technical Architecture</span>
-      </div>
-      <h2>System Architecture & Data Flow</h2>
-      <p class="section-description">
-        Clear separation of concerns with single-source truth architecture and downstream execution pattern.
-      </p>
-
-      <div class="arch-flow">
-        <div class="arch-step">
-          <div class="step-number">1</div>
-          <div class="step-content">
-            <h4>WordPress Plugin (Thin Client)</h4>
-            <p>Distributed via WordPress.org. Provides dashboard UI, manages local consent storage, 
-            authenticates to API via site tokens. Contains zero business logic, authority, or operational state.</p>
-            <p class="mono" style="margin-top: 8px;">Database: MariaDB/MySQL (WordPress content only)</p>
-          </div>
-        </div>
-
-        <div class="arch-step">
-          <div class="step-number">2</div>
-          <div class="step-content">
-            <h4>Web Platform Interface</h4>
-            <p>Browser-based application for portfolio management, team collaboration, and multi-site operations. 
-            Consumes same API as plugin, provides agency-grade features and reporting capabilities.</p>
-            <p class="mono" style="margin-top: 8px;">Access: Browser-based, multi-site focused</p>
-          </div>
-        </div>
-
-        <div class="arch-step">
-          <div class="step-number">3</div>
-          <div class="step-content">
-            <h4>Authoritative API Layer (FastAPI)</h4>
-            <p>Single point of truth for all operations. Validates entitlements, manages job lifecycle, 
-            stores results, enforces business rules. All requests are signed, authenticated, and audited.</p>
-            <p class="mono" style="margin-top: 8px;">Role: Business logic enforcement & state validation</p>
-          </div>
-        </div>
-
-        <div class="arch-step">
-          <div class="step-number">4</div>
-          <div class="step-content">
-            <h4>Authoritative Database (PostgreSQL)</h4>
-            <p>Stores all OpsGate operational truth: site registrations, job definitions, execution results, 
-            evidence artifacts, audit trails, entitlement definitions. Complete temporal history maintained.</p>
-            <p class="mono" style="margin-top: 8px;">Role: Single source of truth for OpsGate state</p>
-          </div>
-        </div>
-
-        <div class="arch-step">
-          <div class="step-number">5</div>
-          <div class="step-content">
-            <h4>Execution Workers (Downstream Processing)</h4>
-            <p>Receive signed job payloads from API, execute scans/checks, return signed results. 
-            Completely invisible to end users—no UI exposure, no direct access, no state persistence.</p>
-            <p class="mono" style="margin-top: 8px;">Pattern: Stateless callback-based execution</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="card">
-        <h3>Database Architecture & Schema Design</h3>
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Database System</th>
-                <th>Purpose & Scope</th>
-                <th>Key Tables/Collections</th>
-                <th>Ownership & Authority</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="strong">PostgreSQL</span><br><span class="mono">Primary OpsGate Database</span></td>
-                <td>Stores all OpsGate operational truth, evidence, audit trails, and system state</td>
-                <td>sites, entitlements, jobs, job_results, activity_events, audit_logs, artifacts</td>
-                <td><span class="status-success">Authoritative</span><br>Single source of truth</td>
-              </tr>
-              <tr>
-                <td><span class="strong">MariaDB/MySQL</span><br><span class="mono">WordPress Database</span></td>
-                <td>WordPress content, themes, plugins, and local plugin settings only</td>
-                <td>wp_posts, wp_options, wp_users, wp_opsgate_consent</td>
-                <td><span class="status-info">Local Storage</span><br>Not authoritative for OpsGate</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- Business Model -->
-    <section id="tiers" class="wrap section">
-      <div class="section-title">
-        <span class="dot"></span>
-        <span>Business Model</span>
-      </div>
-      <h2>Tiered Service Architecture</h2>
-      <p class="section-description">
-        Progressive feature unlocks aligned to customer operational maturity, with clear upgrade 
-        paths driven by specific operational questions and business needs.
-      </p>
-
-      <div class="grid-4">
-        <div class="card tier">
-          <h3>free</h3>
-          <p class="price">$0</p>
-          <p class="price-period">per month</p>
-          <p>Operational visibility foundation</p>
-          <ul style="color: var(--muted); margin-top: 24px; padding-left: 20px; line-height: 1.8;">
-            <li>Manual SSL certificate validation</li>
-            <li>Basic security configuration scanning</li>
-            <li>Dashboard operational view</li>
-            <li>24-hour activity timeline</li>
-            <li>Protection coverage analysis</li>
-          </ul>
-          <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line);">
-            <p class="mono" style="font-size: 0.9rem; color: var(--accent2);">Answers: "What is my current operational status?"</p>
-          </div>
-        </div>
-
-        <div class="card tier highlight">
-          <div class="tier-badge">RECOMMENDED</div>
-          <h3>Starter</h3>
-          <p class="price">$9</p>
-          <p class="price-period">per month / site</p>
-          <p>Automated operational intelligence</p>
-          <ul style="color: var(--muted); margin-top: 24px; padding-left: 20px; line-height: 1.8;">
-            <li>All free tier capabilities</li>
-            <li>Scheduled monitoring and validation</li>
-            <li>Change detection and delta analysis</li>
-            <li>Configurable email alerts</li>
-            <li>90-day operational history</li>
-            <li>Basic trend visualization</li>
-          </ul>
-          <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line);">
-            <p class="mono" style="font-size: 0.9rem; color: var(--accent2);">Answers: "What changed and when did it change?"</p>
-          </div>
-        </div>
-
-        <div class="card tier">
-          <h3>Professional</h3>
-          <p class="price">$29</p>
-          <p class="price-period">per month / site</p>
-          <p>Recovery confidence for revenue operations</p>
-          <ul style="color: var(--muted); margin-top: 24px; padding-left: 20px; line-height: 1.8;">
-            <li>All Starter tier capabilities</li>
-            <li>Automated backup systems</li>
-            <li>Consent-gated restore workflows</li>
-            <li>Advanced malware detection</li>
-            <li>365-day operational history</li>
-            <li>Compliance export capabilities</li>
-          </ul>
-          <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line);">
-            <p class="mono" style="font-size: 0.9rem; color: var(--accent2);">Answers: "Can I recover if something goes wrong?"</p>
-          </div>
-        </div>
-
-        <div class="card tier">
-          <h3>Agency</h3>
-          <p class="price">$99+</p>
-          <p class="price-period">per month</p>
-          <p>Portfolio operations and proof generation</p>
-          <ul style="color: var(--muted); margin-top: 24px; padding-left: 20px; line-height: 1.8;">
-            <li>Multi-site portfolio dashboard</li>
-            <li>Client-safe operational summaries</li>
-            <li>Automated proof-of-work timelines</li>
-            <li>SLA compliance workflows</li>
-            <li>Team collaboration features</li>
-            <li>Volume-based pricing</li>
-          </ul>
-          <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line);">
-            <p class="mono" style="font-size: 0.9rem; color: var(--accent2);">Answers: "Can I prove the value I deliver to clients?"</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="card">
-        <h3>Hybrid Platform Access by Tier</h3>
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Tier</th>
-                <th>WordPress Plugin Access</th>
-                <th>Web Platform Access</th>
-                <th>Primary Interface</th>
-                <th>Use Case</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="strong">free</span></td>
-                <td><span class="status-success">Full Access</span><br>Single-site dashboard, manual checks</td>
-                <td><span class="status-warning">Limited</span><br>Account creation, basic profile</td>
-                <td>WordPress Plugin</td>
-                <td>Solo site operators, initial discovery</td>
-              </tr>
-              <tr>
-                <td><span class="strong">Starter</span></td>
-                <td><span class="status-success">Full Access</span><br>Automated monitoring, alerts</td>
-                <td><span class="status-success">Basic Access</span><br>Single-site web dashboard</td>
-                <td>WordPress Plugin<br>+ Web Supplement</td>
-                <td>Growing sites, basic automation</td>
-              </tr>
-              <tr>
-                <td><span class="strong">Professional</span></td>
-                <td><span class="status-success">Full Access</span><br>Advanced features, recovery tools</td>
-                <td><span class="status-success">Enhanced Access</span><br>Multi-site view, basic reporting</td>
-                <td>Dual Interface</td>
-                <td>Revenue-critical sites, recovery focus</td>
-              </tr>
-              <tr>
-                <td><span class="strong">Agency</span></td>
-                <td><span class="status-success">Full Access</span><br>All plugin features</td>
-                <td><span class="status-success">Complete Access</span><br>Portfolio management, team features</td>
-                <td>Web Platform Primary</td>
-                <td>Agencies, multi-site operators</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- Execution Plan -->
-    <section id="execution" class="wrap section">
-      <div class="section-title">
-        <span class="dot"></span>
-        <span>Execution Plan</span>
-      </div>
-      <h2>Phased Implementation Strategy</h2>
-      <p class="section-description">
-        ROI-driven delivery focusing on market validation, followed by monetization, then operational 
-        expansion, and finally portfolio-scale capabilities.
-      </p>
-
-      <div class="grid-3">
-        <div class="card">
-          <h3>Sprint 1: Foundation (2 Weeks)</h3>
-          <p><span class="strong">Focus:</span> Market-ready MVP with core architecture</p>
-          <p><span class="strong">Deliverables:</span></p>
-          <ul style="color: var(--muted); margin-top: 12px; padding-left: 20px; line-height: 1.8;">
-            <li>free tier operational dashboard</li>
-            <li>API authority layer implementation</li>
-            <li>PostgreSQL database schema</li>
-            <li>SSL certificate validation service</li>
-            <li>Security configuration scanning</li>
-            <li>WordPress plugin v1.0</li>
-          </ul>
-          <p style="margin-top: 20px;"><span class="strong">Success Metric:</span> 100+ active installations</p>
-        </div>
-
-        <div class="card">
-          <h3>Sprint 2: Monetization (2 Weeks)</h3>
-          <p><span class="strong">Focus:</span> Starter tier launch and conversion funnel</p>
-          <p><span class="strong">Deliverables:</span></p>
-          <ul style="color: var(--muted); margin-top: 12px; padding-left: 20px; line-height: 1.8;">
-            <li>Starter tier entitlement system</li>
-            <li>Server-side scheduling engine</li>
-            <li>Email alert and notification system</li>
-            <li>Change detection and delta analysis</li>
-            <li>Dashboard upgrade conversion flows</li>
-            <li>Basic web platform foundation</li>
-          </ul>
-          <p style="margin-top: 20px;"><span class="strong">Success Metric:</span> 5% free-to-Starter conversion rate</p>
-        </div>
-
-        <div class="card">
-          <h3>Sprint 3: Expansion (3 Weeks)</h3>
-          <p><span class="strong">Focus:</span> Professional tier and web platform enhancement</p>
-          <p><span class="strong">Deliverables:</span></p>
-          <ul style="color: var(--muted); margin-top: 12px; padding-left: 20px; line-height: 1.8;">
-            <li>Automated backup systems</li>
-            <li>Consent-gated restore workflows</li>
-            <li>Advanced malware detection pipeline</li>
-            <li>Web platform portfolio features</li>
-            <li>Extended history storage system</li>
-            <li>Agency tier foundation</li>
-          </ul>
-          <p style="margin-top: 20px;"><span class="strong">Success Metric:</span> 20% of paid users upgrade to Professional</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- NEW: Quality Assurance Section -->
-    <section id="qa" class="wrap section">
-      <div class="section-title">
-        <span class="dot"></span>
-        <span>Quality Assurance Framework</span>
-      </div>
-      <h2>Comprehensive Testing & Validation Strategy</h2>
-      <p class="section-description">
-        Enterprise-grade testing framework ensuring system reliability, security compliance, 
-        and optimal user experience across all architectural components.
-      </p>
-
-      <div class="grid-2">
-        <div class="card">
-          <h3>Testing Categories & Protocols</h3>
-          
-          <div style="margin-bottom: 24px;">
-            <h4 style="color: var(--critical); margin-bottom: 12px;">Security Testing</h4>
-            <ul style="color: var(--muted); padding-left: 20px; line-height: 1.8;">
-              <li>API authentication and authorization validation</li>
-              <li>Data encryption in transit and at rest verification</li>
-              <li>SQL injection and cross-site scripting prevention testing</li>
-              <li>Cross-site request forgery protection validation</li>
-              <li>Token validation, rotation, and revocation testing</li>
-              <li>Consent mechanism security validation</li>
-            </ul>
-          </div>
-
-          <div style="margin-bottom: 24px;">
-            <h4 style="color: var(--warning); margin-bottom: 12px;">Integration Testing</h4>
-            <ul style="color: var(--muted); padding-left: 20px; line-height: 1.8;">
-              <li>Plugin-API communication protocol validation</li>
-              <li>API-PostgreSQL data consistency testing</li>
-              <li>Worker callback validation and error recovery testing</li>
-              <li>WordPress version compatibility matrix validation</li>
-              <li>Third-party service integration testing</li>
-              <li>Database migration and schema evolution testing</li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 style="color: var(--success); margin-bottom: 12px;">User Experience Testing</h4>
-            <ul style="color: var(--muted); padding-left: 20px; line-height: 1.8;">
-              <li>Dashboard load performance validation (&lt;2s target)</li>
-              <li>Empty state clarity and guidance testing</li>
-              <li>Error message usability and actionability assessment</li>
-              <li>Upgrade flow completion rate optimization</li>
-              <li>Mobile responsiveness and accessibility compliance</li>
-              <li>Cross-browser compatibility validation</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>Validation Checklist & Success Criteria</h3>
-          <div class="table-container">
+            <h3>Consolidation Layer Coverage</h3>
             <table>
-              <thead>
-                <tr>
-                  <th>Test Case</th>
-                  <th>Success Criteria</th>
-                  <th>Priority</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>API Authority Enforcement</td>
-                  <td>Plugin cannot bypass API for paid features under any condition</td>
-                  <td><span class="status-critical">Critical</span></td>
-                </tr>
-                <tr>
-                  <td>Database Truth Maintenance</td>
-                  <td>All state changes persist exclusively to PostgreSQL with complete audit trail</td>
-                  <td><span class="status-critical">Critical</span></td>
-                </tr>
-                <tr>
-                  <td>Empty State Truthfulness</td>
-                  <td>Dashboard explicitly indicates "no data available" rather than implying "all good"</td>
-                  <td><span class="status-critical">Critical</span></td>
-                </tr>
-                <tr>
-                  <td>Evidence-First Contract</td>
-                  <td>Every run produces JSON receipt + activity entry + artifact index</td>
-                  <td><span class="status-critical">Critical</span></td>
-                </tr>
-                <tr>
-                  <td>Worker System Isolation</td>
-                  <td>End users have no visibility or access to worker systems or execution details</td>
-                  <td><span class="status-warning">High</span></td>
-                </tr>
-                <tr>
-                  <td>Upgrade Flow Reliability</td>
-                  <td>free → Starter conversion completes successfully with immediate feature access</td>
-                  <td><span class="status-warning">High</span></td>
-                </tr>
-                <tr>
-                  <td>Performance Baseline Compliance</td>
-                  <td>Dashboard loads in &lt;2 seconds with empty cache across all supported browsers</td>
-                  <td><span class="status-info">Medium</span></td>
-                </tr>
-                <tr>
-                  <td>Database Migration Safety</td>
-                  <td>Schema updates execute without data loss or service interruption</td>
-                  <td><span class="status-info">Medium</span></td>
-                </tr>
-              </tbody>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Fragmented Reality</th>
+                        <th>OpsGate Consolidation Outcome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Security</strong></td>
+                        <td>Wordfence, Sucuri, iThemes Security</td>
+                        <td>Unified monitoring + toggleable response + evidence ledger</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Management</strong></td>
+                        <td>ManageWP, MainWP, InfiniteWP</td>
+                        <td>Single control plane + scope-based controls across sites</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Backups</strong></td>
+                        <td>UpdraftPlus, BackupBuddy, BlogVault</td>
+                        <td>Backup monitoring + verification + evidence packages</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Compliance</strong></td>
+                        <td>Spreadsheets/checklists/manual audits</td>
+                        <td>Automated evidence packages + immutable receipts</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Operational workflows</strong></td>
+                        <td>Email chains, notes, tribal knowledge</td>
+                        <td>Auditable run history + dashboard-first evidence</td>
+                    </tr>
+                </tbody>
             </table>
-          </div>
-        </div>
-      </div>
 
-      <div class="divider"></div>
+            <h3>Competitive Landscape</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Competitor</th>
+                        <th>What They Do</th>
+                        <th>Where OpsGate Consolidates</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Wordfence</strong></td>
+                        <td>Security scanning & firewall</td>
+                        <td>Security monitoring + toggleable response + evidence</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ManageWP</strong></td>
+                        <td>Multi-site management</td>
+                        <td>Site/portfolio/agency control + evidence tracking</td>
+                    </tr>
+                    <tr>
+                        <td><strong>UpdraftPlus</strong></td>
+                        <td>Backup/restore</td>
+                        <td>Backup monitoring + verification + compliance packaging</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Spreadsheets</strong></td>
+                        <td>Compliance tracking</td>
+                        <td>Evidence-first dashboard + exportable packages</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email chains</strong></td>
+                        <td>Client communication</td>
+                        <td>Structured reporting + evidence sharing + audit trail</td>
+                    </tr>
+                </tbody>
+            </table>
 
-      <div class="card">
-        <h3>Risk Mitigation & Contingency Planning</h3>
-        <div class="grid-3">
-          <div>
-            <h4 style="color: var(--critical); margin-bottom: 12px;">Technical Risks</h4>
-            <ul style="color: var(--muted); padding-left: 20px; line-height: 1.8;">
-              <li>API scalability under production load</li>
-              <li>PostgreSQL performance degradation</li>
-              <li>Worker failure recovery mechanisms</li>
-              <li>Data loss prevention and recovery</li>
-              <li>Network latency and connectivity issues</li>
+            <div class="callout">
+                <strong>Value Proposition:</strong>
+                “Consolidate WordPress agency tool chaos into a single operating system. Monitor everything. Automate only what you explicitly enable.”
+            </div>
+
+            <div class="callout green">
+                <strong>Proof (Dashboard-first Evidence):</strong>
+                The primary output is the <strong>Evidence Ledger dashboard</strong> (what happened, why, under which consent/toggle/scope, with immutable receipts).
+                Exports (PDF/CSV/JSON) are secondary packaging derived from the ledger.
+            </div>
+        </section>
+
+        <!-- 2. Authority law -->
+        <section id="authority-law">
+            <h2>2. NON-NEGOTIABLE ARCHITECTURAL LAW</h2>
+
+            <div class="callout amber">
+                <strong>Authority Order (Locked):</strong>
+                Business Model → API → Data Model → Execution → UI
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="pill blue">Business Model</div>
+                    <h4>Defines</h4>
+                    <ul>
+                        <li>Tiers (Free / Starter / Pro / Agency)</li>
+                        <li>Economics (pricing, overages)</li>
+                        <li>Scope limits and available capabilities</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="pill blue">API (FastAPI)</div>
+                    <h4>Sole Authority For</h4>
+                    <ul>
+                        <li>Entitlements</li>
+                        <li>Consent</li>
+                        <li>Toggles</li>
+                        <li>Run creation</li>
+                        <li>Evidence registration</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="pill blue">Data Model (PostgreSQL)</div>
+                    <h4>Canonical & Immutable</h4>
+                    <ul>
+                        <li>Runs</li>
+                        <li>Receipts</li>
+                        <li>Artifacts index</li>
+                        <li>Toggles</li>
+                        <li>Consent</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="pill blue">Execution (n8n / workers)</div>
+                    <h4>Strictly Behind API</h4>
+                    <ul>
+                        <li>Non-authoritative</li>
+                        <li>Only executes after API-approved run</li>
+                        <li>Reports outcomes back to API</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="pill blue">UI (WP Plugin + Web Dashboard)</div>
+                    <h4>Thin Clients Only</h4>
+                    <ul>
+                        <li>Consent UI</li>
+                        <li>Toggle control</li>
+                        <li>Evidence display</li>
+                    </ul>
+                    <div class="subtle">WordPress (MariaDB) is UI-state only.</div>
+                </div>
+                <div class="card">
+                    <div class="pill red">Core Rules</div>
+                    <ul class="check-list">
+                        <li>OpsGate does nothing unless explicitly allowed</li>
+                        <li>OpsGate shows what it could do, never acts by default</li>
+                        <li>Every behavior is a toggle</li>
+                        <li>Every toggle has scope (site / portfolio / agency)</li>
+                        <li>Every toggle leaves evidence</li>
+                        <li>Toggles are not services</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Environment Constraints (Locked)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Area</th>
+                        <th>Constraint</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Hosting / Infra</strong></td>
+                        <td>Single VPS only • One owned domain • Caddy (not Nginx) • Docker + Docker Compose • No AWS/CloudFront/Route53/Multi-region</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dev / Build</strong></td>
+                        <td>VS Code Remote SSH • Git on VPS under /opt/opsgate • Docker rebuild/recreate • Solo developer executable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Customer language</strong></td>
+                        <td>Internal tools never exposed in customer-facing UI language</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 3. Business model -->
+        <section id="business-model">
+            <h2>3. BUSINESS MODEL</h2>
+
+            <h3>3.1 Offer Ladder by Value Level</h3>
+            <div class="tiers-container">
+                <div class="tier-card tier-free">
+                    <div class="tier-header">
+                        <div class="tier-name">FREE</div>
+                        <div class="tier-price">$0</div>
+                        <div class="tier-period">forever</div>
+                        <div style="margin-top: 8px; font-size: 0.9rem;">3 sites max</div>
+                    </div>
+                    <div class="tier-body">
+                        <div class="tier-feature highlight">Value: Discovery</div>
+                        <div class="tier-feature">Tool audit wizard</div>
+                        <div class="tier-feature">Consolidation calculator</div>
+                        <div class="tier-feature">Monitoring consent (detect-only)</div>
+                        <div class="tier-feature">Evidence ledger (limited history)</div>
+                        <div class="tier-feature highlight">All automation toggles: OFF by default</div>
+                        <div class="subtle" style="margin-top: 10px;"><strong>Target:</strong> WordPress agencies evaluating consolidation</div>
+                    </div>
+                </div>
+
+                <div class="tier-card tier-starter">
+                    <div class="tier-header">
+                        <div class="tier-name">STARTER</div>
+                        <div class="tier-price">$79</div>
+                        <div class="tier-period">per month</div>
+                        <div style="margin-top: 8px; font-size: 0.9rem;">15 sites included + $3/site overage</div>
+                    </div>
+                    <div class="tier-body">
+                        <div class="tier-feature highlight">Value: Consolidation + Control</div>
+                        <div class="tier-feature">Toggle enable/disable with confirmation</div>
+                        <div class="tier-feature">Scope control (site/portfolio/agency)</div>
+                        <div class="tier-feature">Evidence ledger (full)</div>
+                        <div class="tier-feature">Notifications + evidence packages</div>
+                        <div class="tier-feature highlight">3 core toggles: FTP / Backup / SSL</div>
+                        <div class="subtle" style="margin-top: 10px;"><strong>Target:</strong> WordPress agencies managing 5–15 sites</div>
+                    </div>
+                </div>
+
+                <div class="tier-card tier-pro">
+                    <div class="tier-header">
+                        <div class="tier-name">PRO</div>
+                        <div class="tier-price">$199</div>
+                        <div class="tier-period">per month</div>
+                        <div style="margin-top: 8px; font-size: 0.9rem;">50 sites included</div>
+                    </div>
+                    <div class="tier-body">
+                        <div class="tier-feature highlight">Value: Advanced Control</div>
+                        <div class="tier-feature">Advanced scope definitions</div>
+                        <div class="tier-feature">White-label reporting</div>
+                        <div class="tier-feature">API access for custom workflows</div>
+                        <div class="tier-feature"><em>Designed, not built in 6 months</em></div>
+                        <div class="subtle" style="margin-top: 10px;"><strong>Target:</strong> Agencies 20–50 sites</div>
+                    </div>
+                </div>
+
+                <div class="tier-card tier-agency">
+                    <div class="tier-header">
+                        <div class="tier-name">AGENCY</div>
+                        <div class="tier-price">$499</div>
+                        <div class="tier-period">per month</div>
+                        <div style="margin-top: 8px; font-size: 0.9rem;">Unlimited sites (fair use)</div>
+                    </div>
+                    <div class="tier-body">
+                        <div class="tier-feature highlight">Value: Enterprise Operations</div>
+                        <div class="tier-feature">Custom compliance workflows</div>
+                        <div class="tier-feature">Dedicated execution capacity</div>
+                        <div class="tier-feature">SLA-backed guarantees</div>
+                        <div class="tier-feature"><em>Designed, not built in 6 months</em></div>
+                        <div class="subtle" style="margin-top: 10px;"><strong>Target:</strong> Agencies 50+ sites</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Consolidation Math (Front & Center)</h3>
+            <div class="code-block">Currently paying:
+✓ Wordfence: $1,485/year
+✓ ManageWP: $360/year
+✓ BackupBuddy: $80/year
+✓ Manual work: $2,400/year
+───────────────
+Total: $4,325/year
+
+OpsGate Consolidation: $948/year
+Save: $3,377/year (78% reduction)</div>
+
+            <h3>3.2 Professional Services</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Price</th>
+                        <th>MICA (Assessment Action)</th>
+                        <th>Deliverable</th>
+                        <th>Target</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Consolidation Assessment</strong></td>
+                        <td>$249 one-time</td>
+                        <td>Map tool chaos → quantify operational gaps → identify consolidation opportunities</td>
+                        <td>Technical audit + ROI report</td>
+                        <td>Agencies considering Starter</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Toggle Implementation</strong></td>
+                        <td>$499 one-time</td>
+                        <td>Review evidence potential + define scope controls + enable toggles safely</td>
+                        <td>Production-ready toggle configuration</td>
+                        <td>New Starter customers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Custom Toggle Development</strong></td>
+                        <td>$2,500–$7,500</td>
+                        <td>Define agency-specific needs + evidence requirements + controlled enablement plan</td>
+                        <td>Custom toggleable workflows</td>
+                        <td>Pro/Agency customers</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout amber">
+                <strong>MICA = My Ideal Client Assessment</strong><br>
+                MICA is assessment / consolidation-driven action. MICA is not automation.
+                Examples: running consolidation assessment, viewing operational gaps, reviewing evidence potential, deciding what should be automated later.
+            </div>
+        </section>
+
+        <!-- 4. Journeys -->
+        <section id="journeys">
+            <h2>4. CUSTOMER JOURNEYS & WIREFRAMES</h2>
+
+            <h3>4.1 Journey: Agency → Consolidation Proof (Free Tier)</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>How they hear about OpsGate</h4>
+                    <ul>
+                        <li>WordPress.org search (“agency operating system”)</li>
+                        <li>Content (“true cost of WordPress tool chaos”)</li>
+                        <li>Communities (FB groups, Reddit, LinkedIn)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>First point of contact</h4>
+                    <ul>
+                        <li>WordPress.org plugin page</li>
+                        <li>Message: “Consolidate your tool stack. Monitor everything. No automation by default.”</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4>Wireframes (Free Tier)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Screen</th>
+                        <th>What the user sees</th>
+                        <th>Actions</th>
+                        <th>Consent / Toggles / Evidence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>P1: Tool Audit</strong></td>
+                        <td>Pick current tools (security/backup/management) + calculate savings</td>
+                        <td>Select tools, view consolidation estimate</td>
+                        <td>Consent: none • Toggles: not available • Evidence: assessment snapshot</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P2: Monitoring Consent</strong></td>
+                        <td>Choose monitoring signals (detect-only)</td>
+                        <td>Enable monitoring consent per signal type</td>
+                        <td>Consent: explicit • Toggles: OFF/locked • Evidence: consent receipt</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P3: Evidence Ledger</strong></td>
+                        <td>Events show in dashboard ledger</td>
+                        <td>View evidence, generate report</td>
+                        <td>Evidence: monitoring entries • Export: optional report (secondary)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout green">
+                <strong>Activation Moment (MICA):</strong>
+                Agency generates and shares a consolidation report that includes tool costs, savings, and monitoring proof from the evidence ledger.
+            </div>
+
+            <h3>4.2 Journey: Agency → Controlled Automation (Starter Tier)</h3>
+
+            <h4>Wireframes (Starter Tier)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Screen</th>
+                        <th>What the user sees</th>
+                        <th>Actions</th>
+                        <th>Consent / Toggles / Evidence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>W1: Toggle Management Center</strong></td>
+                        <td>Toggle list grouped by category + scope selector</td>
+                        <td>Enable/disable toggles, set scope</td>
+                        <td>Consent: required • Toggle: explicit ON/OFF • Evidence: toggle audit trail</td>
+                    </tr>
+                    <tr>
+                        <td><strong>W2: Enablement Confirmation</strong></td>
+                        <td>Impact summary + rules + confirmation</td>
+                        <td>Confirm enablement and parameters</td>
+                        <td>Evidence: enablement receipt generated</td>
+                    </tr>
+                    <tr>
+                        <td><strong>W3: Evidence Ledger</strong></td>
+                        <td>Run history + receipts + artifacts index</td>
+                        <td>Filter evidence, generate package</td>
+                        <td>Dashboard-first truth surface • Exports are secondary packaging</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="toggle-example">
+                <h4 style="margin-top:0;">Toggle UI Example (Scope + Confirmation)</h4>
+
+                <div class="toggle-item">
+                    <div>
+                        <div style="font-weight:900;">FTP Upload Quarantine</div>
+                        <div class="subtle">Scope: Portfolio (15 sites) • Requires monitoring consent</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-item">
+                    <div>
+                        <div style="font-weight:900;">Backup Verification</div>
+                        <div class="subtle">Scope: Portfolio • Evidence receipt on each verification</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-item" style="margin-bottom:0;">
+                    <div>
+                        <div style="font-weight:900;">SSL Monitoring & Renewal</div>
+                        <div class="subtle">Scope: Agency • Renewal requires explicit enablement</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="callout amber">
+                <strong>Starter MICA (Locked):</strong>
+                Review operational gaps and evidence potential, then decide what should be automated later (before enabling).
+            </div>
+        </section>
+
+        <!-- 5. Branding + funnels -->
+        <section id="branding">
+            <h2>5. HIGH-LEVEL DESIGN & BRANDING SYSTEM</h2>
+
+            <h3>5.1 Brand posture</h3>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="pill green">Control-centric</div>
+                    <p>Professional, authoritative, non-presumptive. Control panel, not an assistant.</p>
+                </div>
+                <div class="card">
+                    <div class="pill green">Permission-first</div>
+                    <p>Nothing runs without explicit consent and toggle enablement.</p>
+                </div>
+                <div class="card">
+                    <div class="pill green">Evidence-first</div>
+                    <p>Every behavior produces run → receipt → artifact and is visible in the dashboard ledger.</p>
+                </div>
+            </div>
+
+            <h3>5.2 Lead lifecycle automation (Funnels)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Funnel</th>
+                        <th>Trigger</th>
+                        <th>Sequence</th>
+                        <th>Goal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Funnel 1: WordPress.org → Free</strong></td>
+                        <td>Plugin installation</td>
+                        <td>Day 0 welcome + tool audit → Day 2 case study → Day 7 upgrade prompt → Day 14 report reminder</td>
+                        <td>Free → Starter conversion (5–10%)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Funnel 2: Website → Assessment</strong></td>
+                        <td>Assessment inquiry</td>
+                        <td>Immediate questionnaire → Day 1 consolidation report → Day 3 proposal → Day 7 follow-up</td>
+                        <td>Assessment → Starter + Implementation (30–40%)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Funnel 3: Starter → Retention</strong></td>
+                        <td>First toggle enablement</td>
+                        <td>Immediate receipt → Week 1 report → Month 1 ROI report → Month 3 Pro intro</td>
+                        <td>Retention > 90%, upgrades 10–15%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>5.3 Email cycles</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Onboarding (All tiers)</h4>
+                    <ul>
+                        <li>Welcome: value + next steps</li>
+                        <li>Day 3: platform orientation</li>
+                        <li>Day 7: success story + advanced tease</li>
+                        <li>Day 14: check-in + support offer</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Value reinforcement (Starter+)</h4>
+                    <ul>
+                        <li>Weekly: security operations summary</li>
+                        <li>Monthly: consolidation savings report</li>
+                        <li>Quarterly: automation effectiveness review</li>
+                        <li>Annual: total ROI calculation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout">
+                <strong>Dashboard-first proof rule:</strong>
+                Every funnel and email cycle points back to the evidence ledger as the primary value surface. Exports are packaging.
+            </div>
+        </section>
+
+        <!-- 6. Prioritization -->
+        <section id="prioritization">
+            <h2>6. PRIORITIZATION</h2>
+
+            <h3>6.1 Priority framework</h3>
+            <ul>
+                <li><strong>Rule 1:</strong> Enable Free → Starter funnel first</li>
+                <li><strong>Rule 2:</strong> Prove consolidation value before automation</li>
+                <li><strong>Rule 3:</strong> Build control mechanisms before automation capabilities</li>
+                <li><strong>Rule 4:</strong> Implement evidence system parallel to execution</li>
             </ul>
-          </div>
-          <div>
-            <h4 style="color: var(--warning); margin-bottom: 12px;">Business Risks</h4>
-            <ul style="color: var(--muted); padding-left: 20px; line-height: 1.8;">
-              <li>Low free-to-paid conversion rates</li>
-              <li>Market adoption timing and competition</li>
-              <li>Competitive response and feature parity</li>
-              <li>Pricing model market acceptance</li>
-              <li>Customer retention and churn rates</li>
-            </ul>
-          </div>
-          <div>
-            <h4 style="color: var(--info); margin-bottom: 12px;">Mitigation Actions</h4>
-            <ul style="color: var(--muted); padding-left: 20px; line-height: 1.8;">
-              <li>Progressive scaling architecture implementation</li>
-              <li>Comprehensive monitoring and alerting systems</li>
-              <li>A/B testing for conversion optimization</li>
-              <li>Competitive analysis and feature differentiation</li>
-              <li>Customer feedback integration cycles</li>
-            </ul>
-          </div>
+
+            <h3>6.2 Priority order (Why → What)</h3>
+            <div class="timeline">
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-title">Priority 1: Foundation</div>
+                        <div class="phase-duration">Weeks 1–4</div>
+                    </div>
+                    <p><strong>Why:</strong> Nothing works without auth, consent, evidence.</p>
+                    <ul>
+                        <li>PostgreSQL schema + consent/toggles primitives</li>
+                        <li>FastAPI authority layer + entitlements</li>
+                        <li>WP plugin: monitoring consent UI + connection status</li>
+                        <li>Evidence chain: runs → receipts → artifacts index</li>
+                    </ul>
+                </div>
+
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-title">Priority 2: Consolidation Proof</div>
+                        <div class="phase-duration">Weeks 5–8</div>
+                    </div>
+                    <p><strong>Why:</strong> ROI proof drives conversion.</p>
+                    <ul>
+                        <li>Tool audit wizard + tool pricing database</li>
+                        <li>Savings calculation + consolidation report generation</li>
+                        <li>Evidence package generation derived from ledger</li>
+                    </ul>
+                </div>
+
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-title">Priority 3: First Toggle</div>
+                        <div class="phase-duration">Weeks 9–12</div>
+                    </div>
+                    <p><strong>Why:</strong> One complete automation validates the control model.</p>
+                    <ul>
+                        <li>FTP monitoring consent system</li>
+                        <li>FTP quarantine toggle (scope controls + receipts)</li>
+                        <li>Quarantine artifact indexing</li>
+                    </ul>
+                </div>
+
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-title">Priority 4: Essential Automation</div>
+                        <div class="phase-duration">Weeks 13–20</div>
+                    </div>
+                    <p><strong>Why:</strong> MVP needs 3 core toggles + reporting.</p>
+                    <ul>
+                        <li>Backup verification toggle</li>
+                        <li>SSL monitoring & renewal toggle</li>
+                        <li>Notifications + evidence packages</li>
+                    </ul>
+                </div>
+
+                <div class="phase" style="margin-bottom:0;">
+                    <div class="phase-header">
+                        <div class="phase-title">Priority 5: Polish & Launch</div>
+                        <div class="phase-duration">Weeks 21–24</div>
+                    </div>
+                    <p><strong>Why:</strong> Professional UX drives conversions and retention.</p>
+                    <ul>
+                        <li>Web dashboard (toggle management + evidence viewer)</li>
+                        <li>Export packaging (PDF/JSON/CSV) derived from ledger</li>
+                        <li>Beta with 3 agencies + launch materials</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Functional specification -->
+        <section id="functional-spec">
+            <h2>7. FUNCTIONAL SPECIFICATION</h2>
+
+            <h3>7.1 What users CAN do</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Free tier</h4>
+                    <ul class="check-list">
+                        <li>Install WordPress plugin</li>
+                        <li>Audit current tool stack</li>
+                        <li>Calculate consolidation savings</li>
+                        <li>Grant monitoring consent per signal type</li>
+                        <li>View monitoring evidence for 3 sites</li>
+                        <li>Generate limited evidence reports</li>
+                        <li>Share consolidation reports</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Starter tier</h4>
+                    <ul class="check-list">
+                        <li>Everything in Free</li>
+                        <li>Connect up to 15 sites</li>
+                        <li>Enable/disable automation toggles</li>
+                        <li>Set toggle scope (site/portfolio/agency)</li>
+                        <li>Configure toggle parameters</li>
+                        <li>View complete evidence ledger</li>
+                        <li>Generate unlimited evidence packages</li>
+                        <li>Export evidence (PDF/JSON/CSV)</li>
+                        <li>Receive automated notifications</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>7.2 What users CANNOT do</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>All users</h4>
+                    <ul class="x-list">
+                        <li>Automate without explicit toggle enablement</li>
+                        <li>Modify or delete evidence records</li>
+                        <li>Bypass scope controls</li>
+                        <li>Access other agencies’ data</li>
+                        <li>Use AI for decision-making or execution</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>System constraints</h4>
+                    <ul class="x-list">
+                        <li>Execute any action without API authority</li>
+                        <li>Store canonical truth outside PostgreSQL</li>
+                        <li>Hide evidence of actions taken</li>
+                        <li>Operate without explicit consent at every level</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout green">
+                <strong>Dashboard-first UX rule:</strong>
+                Evidence is born in the ledger (runs/receipts/artifacts). Exports are secondary packaging.
+            </div>
+        </section>
+
+        <!-- 8. Test cases -->
+        <section id="test-cases">
+            <h2>8. TEST CASES</h2>
+
+            <h3>8.1 Core flow (must pass)</h3>
+            <div class="code-block">Given: User installs OpsGate plugin
+When: User grants FTP monitoring consent
+And: FTP upload occurs
+Then: System detects upload and stores monitoring evidence
+And: System does NOT quarantine file (toggle default: OFF)
+And: User can view detection in evidence ledger
+
+When: User enables FTP quarantine toggle for portfolio scope
+And: Another FTP upload occurs
+Then: System quarantines file
+And: Generates toggle execution receipt
+And: Stores quarantine artifact
+And: Sends notification
+And: All evidence linked in ledger</div>
+
+            <h3>8.2 Error case (must handle)</h3>
+            <div class="code-block">Given: Toggle enabled but monitoring consent revoked
+When: Trigger event occurs
+Then: System creates blocked run
+And: Logs "toggle enabled but consent missing"
+And: Notifies user of configuration conflict
+And: Does NOT execute automation</div>
+
+            <h3>8.3 Scope enforcement (must enforce)</h3>
+            <div class="code-block">Given: Toggle enabled at agency scope
+When: Site added to agency portfolio
+Then: Toggle automatically applies to new site
+And: Evidence shows scope inheritance
+And: User can override at site level if needed</div>
+        </section>
+
+        <!-- 9. Technical wireframes -->
+        <section id="tech-wireframes">
+            <h2>9. TECHNICAL WIREFRAMES</h2>
+
+            <h3>9.1 Code architecture</h3>
+            <div class="code-block">/opt/opsgate/
+├── docker-compose.yml          # VPS deployment
+├── caddy/
+│   └── Caddyfile              # Reverse proxy config
+├── postgres/
+│   ├── init.sql               # Schema + indexes
+│   └── backup.sh              # Daily backups
+├── fastapi/
+│   ├── app/
+│   │   ├── main.py            # FastAPI app
+│   │   ├── auth.py            # JWT authentication
+│   │   ├── database.py        # PostgreSQL connection
+│   │   ├── api/
+│   │   │   ├── accounts.py    # Account management
+│   │   │   ├── consent.py     # Monitoring consent
+│   │   │   ├── toggles.py     # Toggle management
+│   │   │   ├── runs.py        # Run creation/query
+│   │   │   ├── receipts.py    # Evidence storage
+│   │   │   └── artifacts.py   # Artifact indexing
+│   │   └── middleware/
+│   │       ├── entitlements.py
+│   │       └── logging.py
+├── n8n/
+│   ├── workflows/
+│   │   ├── monitoring/
+│   │   └── automation/
+├── wordpress-plugin/
+│   ├── opsgate.php
+│   ├── includes/
+│   └── assets/
+└── web-dashboard/
+    ├── index.html
+    ├── css/
+    ├── js/
+    └── api/</div>
+
+            <h3>9.2 Database architecture</h3>
+            <div class="code-block">-- Core authority tables
+accounts (id, email, company, plan, limits, billing_status)
+sites (id, account_id, domain, token, connected_at)
+
+-- Dual-consent primitives
+monitoring_consents (id, site_id, signal_type, enabled, granted_at)
+automation_toggles (id, name, category, description, min_tier)
+toggle_assignments (id, account_id, toggle_id, site_id, scope, enabled)
+
+-- Universal evidence chain
+runs (id, site_id, workflow_type, workflow_name, status, toggle_assignment_id)
+receipts (id, run_id, input_snapshot, output_snapshot, evidence_hash)
+artifact_index (id, run_id, artifact_type, artifact_path, metadata)
+
+-- Business tables
+consolidation_evidence (id, account_id, period, tool_costs, savings)
+client_packages (id, account_id, package_type, generated_at, shared)</div>
+
+            <h3>9.3 Infrastructure architecture (VPS-only)</h3>
+            <div class="code-block">VPS (4GB RAM, 2 vCPU, 80GB SSD)
+├── Caddy (80/443)
+│   ├── FastAPI (8000)
+│   ├── Web Dashboard (3000)
+│   └── (Internal) n8n UI (5678) - INTERNAL ONLY
+├── PostgreSQL (5432)
+├── Docker + Docker Compose
+└── Backup: daily local, weekly off-VPS</div>
+
+            <div class="callout red">
+                <strong>Constraint reminder:</strong>
+                Single VPS only. Caddy only. No AWS/CloudFront/Route53. Git under /opt/opsgate is the source of truth.
+            </div>
+        </section>
+
+        <!-- 10. Scrum plan -->
+        <section id="scrum-plan">
+            <h2>10. 6-MONTH SCRUM PLAN (EXECUTABLE)</h2>
+
+            <h3>10.1 Phases → Sprints → Epics</h3>
+            <div class="timeline">
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-title">PHASE 1: FOUNDATION</div>
+                        <div class="phase-duration">Month 1</div>
+                    </div>
+                    <div class="subtle">Goal: VPS + DB + Auth + consent/toggle primitives + evidence chain skeleton.</div>
+                </div>
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-title">PHASE 2: WORDPRESS INTEGRATION</div>
+                        <div class="phase-duration">Month 2</div>
+                    </div>
+                    <div class="subtle">Goal: Plugin foundation + monitoring consent UI + tool audit calculator.</div>
+                </div>
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-title">PHASE 3: FIRST AUTOMATION</div>
+                        <div class="phase-duration">Month 3</div>
+                    </div>
+                    <div class="subtle">Goal: runs/receipts/artifacts end-to-end + FTP quarantine toggle.</div>
+                </div>
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-title">PHASE 4: ESSENTIAL FEATURES</div>
+                        <div class="phase-duration">Month 4</div>
+                    </div>
+                    <div class="subtle">Goal: Backup verification + SSL monitoring/renewal + evidence ledger UX.</div>
+                </div>
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-title">PHASE 5: POLISH</div>
+                        <div class="phase-duration">Month 5</div>
+                    </div>
+                    <div class="subtle">Goal: Notifications + export packaging + reporting.</div>
+                </div>
+                <div class="phase" style="margin-bottom:0;">
+                    <div class="phase-header">
+                        <div class="phase-title">PHASE 6: LAUNCH PREP</div>
+                        <div class="phase-duration">Month 6</div>
+                    </div>
+                    <div class="subtle">Goal: Beta agencies + documentation + launch materials.</div>
+                </div>
+            </div>
+
+            <h3>10.2 Sprint breakdown (Epics → User Stories → Tasks)</h3>
+
+            <h4>Sprint 1: Infrastructure & Database</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Epic</th>
+                        <th>User Stories</th>
+                        <th>Tasks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Core system foundation</td>
+                        <td>
+                            <ul>
+                                <li>As a developer, I have a working VPS with Docker and Caddy</li>
+                                <li>As a system, I can store accounts and sites in PostgreSQL</li>
+                                <li>As an API, I can authenticate requests with JWT</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Provision VPS (4GB, Ubuntu 22.04)</li>
+                                <li>Install Docker + Docker Compose</li>
+                                <li>Configure Caddy with domain + HTTPS</li>
+                                <li>Create PostgreSQL container</li>
+                                <li>Initialize schema v1</li>
+                                <li>Build FastAPI container scaffold</li>
+                                <li>Implement JWT auth endpoints</li>
+                                <li>Set up DB backups (daily)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Sprint 2: Dual-Consent Primitives</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Epic</th>
+                        <th>User Stories</th>
+                        <th>Tasks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Consent + toggle foundation</td>
+                        <td>
+                            <ul>
+                                <li>As a user, I can grant monitoring consent per signal type</li>
+                                <li>As a user, I can view available toggles</li>
+                                <li>As a system, consent/toggle changes are logged immutably</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Create monitoring_consents table + endpoints</li>
+                                <li>Create automation_toggles catalog</li>
+                                <li>Create toggle_assignments table + CRUD</li>
+                                <li>Build scope resolution (site→portfolio→agency)</li>
+                                <li>Entitlement middleware (limits object enforced by API)</li>
+                                <li>Audit logging for changes</li>
+                                <li>OpenAPI docs</li>
+                                <li>Rate limiting per account</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Sprint 3: Plugin Foundation</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Epic</th>
+                        <th>User Stories</th>
+                        <th>Tasks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>WP plugin + consent UI</td>
+                        <td>
+                            <ul>
+                                <li>As a WP admin, I can install OpsGate from .zip</li>
+                                <li>As a user, I can grant monitoring consent for my site</li>
+                                <li>As a plugin, I can send monitoring data to API</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Plugin skeleton</li>
+                                <li>Consent UI per signal type</li>
+                                <li>Secure token exchange (site → API)</li>
+                                <li>Connection status page</li>
+                                <li>API client with retries</li>
+                                <li>Uninstall cleanup</li>
+                                <li>Multi-WP version tests</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Sprint 4: Consolidation Calculator</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Epic</th>
+                        <th>User Stories</th>
+                        <th>Tasks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Value demonstration</td>
+                        <td>
+                            <ul>
+                                <li>As a user, I can audit my tool stack</li>
+                                <li>As a user, I can see consolidation savings</li>
+                                <li>As a user, I can generate a consolidation report</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Tool audit wizard (plugin)</li>
+                                <li>Tool pricing database</li>
+                                <li>Savings calculation</li>
+                                <li>Report generation (dashboard-first, export secondary)</li>
+                                <li>Report history limits (Free)</li>
+                                <li>Upgrade prompts based on savings</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Sprint 5: Evidence Chain & Execution Integration</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Epic</th>
+                        <th>User Stories</th>
+                        <th>Tasks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Universal evidence system</td>
+                        <td>
+                            <ul>
+                                <li>As a system, all executions create a run record</li>
+                                <li>As a system, run outcomes generate immutable receipts</li>
+                                <li>As a system, artifacts are indexed and retrievable</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Create runs/receipts/artifact_index tables</li>
+                                <li>Run creation endpoints</li>
+                                <li>Receipt hashing + snapshots</li>
+                                <li>Artifact storage (files) + DB index (canonical)</li>
+                                <li>Execution auth back to API</li>
+                                <li>Error handling + retry strategy</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Sprint 6: FTP Quarantine Toggle</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Epic</th>
+                        <th>User Stories</th>
+                        <th>Tasks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>First complete automation</td>
+                        <td>
+                            <ul>
+                                <li>As a user, I can enable FTP quarantine toggle</li>
+                                <li>As a system, uploads are quarantined when toggle ON</li>
+                                <li>As a user, I receive evidence of actions</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Enhance FTP monitoring signal</li>
+                                <li>Toggle check before execution</li>
+                                <li>Quarantine storage + artifact indexing</li>
+                                <li>Notification on quarantine</li>
+                                <li>Evidence linking (run→receipt→artifact)</li>
+                                <li>End-to-end tests</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Sprint 7: Backup Verification Toggle</h4>
+            <h4>Sprint 8: SSL Monitoring & Renewal + Basic Web Dashboard</h4>
+            <h4>Sprint 9: Notification System</h4>
+            <h4>Sprint 10: Export & Reporting</h4>
+            <h4>Sprint 11: Beta Testing</h4>
+            <h4>Sprint 12: Launch Preparation</h4>
+
+            <div class="callout amber">
+                The remaining sprints (7–12) follow the same structure as above and are already defined in the weekly schedule section below.
+                The deliverable standard remains: dashboard-first evidence, exports secondary packaging, authority-first model enforced.
+            </div>
+
+            <h3>10.3 Weekly sprint schedule</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Week</th>
+                        <th>Focus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Month 1</td><td>Week 1</td><td>VPS setup, Docker, Caddy, PostgreSQL</td></tr>
+                    <tr><td>Month 1</td><td>Week 2</td><td>FastAPI auth, JWT, basic endpoints</td></tr>
+                    <tr><td>Month 1</td><td>Week 3</td><td>Consent/toggles API, scope logic</td></tr>
+                    <tr><td>Month 1</td><td>Week 4</td><td>OpenAPI docs, rate limiting, backups</td></tr>
+
+                    <tr><td>Month 2</td><td>Week 5</td><td>WP plugin foundation, consent UI</td></tr>
+                    <tr><td>Month 2</td><td>Week 6</td><td>Monitoring collectors, API client</td></tr>
+                    <tr><td>Month 2</td><td>Week 7</td><td>Tool audit wizard, pricing DB</td></tr>
+                    <tr><td>Month 2</td><td>Week 8</td><td>Savings calculator, report generation</td></tr>
+
+                    <tr><td>Month 3</td><td>Week 9</td><td>Evidence chain (runs/receipts/artifacts)</td></tr>
+                    <tr><td>Month 3</td><td>Week 10</td><td>Execution integration, toggle checking</td></tr>
+                    <tr><td>Month 3</td><td>Week 11</td><td>FTP monitoring enhancement</td></tr>
+                    <tr><td>Month 3</td><td>Week 12</td><td>FTP quarantine workflow + testing</td></tr>
+
+                    <tr><td>Month 4</td><td>Week 13</td><td>Backup monitoring + verification</td></tr>
+                    <tr><td>Month 4</td><td>Week 14</td><td>Backup workflow + alerts + evidence</td></tr>
+                    <tr><td>Month 4</td><td>Week 15</td><td>SSL monitoring + renewal logic</td></tr>
+                    <tr><td>Month 4</td><td>Week 16</td><td>Web dashboard foundation + evidence viewer</td></tr>
+
+                    <tr><td>Month 5</td><td>Week 17</td><td>Notification system + templates</td></tr>
+                    <tr><td>Month 5</td><td>Week 18</td><td>Notification preferences + evidence</td></tr>
+                    <tr><td>Month 5</td><td>Week 19</td><td>Export packaging (PDF/CSV/JSON)</td></tr>
+                    <tr><td>Month 5</td><td>Week 20</td><td>Business reporting + scheduling logic</td></tr>
+
+                    <tr><td>Month 6</td><td>Week 21</td><td>Beta recruitment + onboarding</td></tr>
+                    <tr><td>Month 6</td><td>Week 22</td><td>Feedback collection + bug fixes</td></tr>
+                    <tr><td>Month 6</td><td>Week 23</td><td>Documentation + support setup</td></tr>
+                    <tr><td>Month 6</td><td>Week 24</td><td>Launch materials + final testing</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 11. Metrics -->
+        <section id="metrics">
+            <h2>11. SUCCESS CRITERIA & METRICS</h2>
+
+            <h3>11.1 Technical success (Month 6)</h3>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="pill green">Dual-consent</div>
+                    <p>Monitoring consent and automation toggles working end-to-end.</p>
+                </div>
+                <div class="card">
+                    <div class="pill green">3 core toggles</div>
+                    <p>FTP quarantine, Backup verification, SSL monitoring/renewal operational.</p>
+                </div>
+                <div class="card">
+                    <div class="pill green">Evidence chain</div>
+                    <p>Every run produces receipts + indexed artifacts visible in ledger.</p>
+                </div>
+                <div class="card">
+                    <div class="pill blue">Reliability</div>
+                    <p>&lt; 2% error rate (production), 99.9% uptime target.</p>
+                </div>
+                <div class="card">
+                    <div class="pill blue">Performance</div>
+                    <p>API response time p95 &lt; 200ms.</p>
+                </div>
+                <div class="card">
+                    <div class="pill amber">Recoverability</div>
+                    <p>Backup/restore procedures tested.</p>
+                </div>
+            </div>
+
+            <h3>11.2 Business success (Month 6)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Target</th>
+                        <th>Definition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Beta agencies</strong></td>
+                        <td>3</td>
+                        <td>Using core features successfully</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Paying Starter</strong></td>
+                        <td>10</td>
+                        <td>$790 MRR</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Toggle adoption</strong></td>
+                        <td>&gt; 60%</td>
+                        <td>Active users enabling at least one toggle</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Report sharing</strong></td>
+                        <td>&gt; 70%</td>
+                        <td>Sharing consolidation/evidence packages with clients</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Free → Starter conversion</strong></td>
+                        <td>5–10%</td>
+                        <td>Conversion driven by consolidation proof</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout">
+                <strong>Evidence-first UX requirement:</strong>
+                All metrics must be measurable from the evidence ledger and report generation history.
+            </div>
+        </section>
+
+        <!-- 12. Execution -->
+        <section id="execution">
+            <h2>12. EXECUTION COMMAND</h2>
+
+            <h3>Starting point (Day 1)</h3>
+            <div class="code-block">ssh root@vps-ip
+cd /opt
+git init opsgate
+cd opsgate
+# Begin with docker-compose.yml</div>
+
+            <h3>Weekly rhythm</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Focus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Monday</strong></td><td>Sprint planning, task assignment</td></tr>
+                    <tr><td><strong>Tue–Thu</strong></td><td>Development + testing</td></tr>
+                    <tr><td><strong>Friday</strong></td><td>Demo + review + documentation</td></tr>
+                    <tr><td><strong>Weekend</strong></td><td>Deployment + monitoring check</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Non-negotiable rules</h3>
+            <ol>
+                <li><strong>Authority First:</strong> Business Model → API → Data Model → Execution → UI</li>
+                <li><strong>Dual Consent:</strong> Monitoring ≠ Automation, both explicit opt-in</li>
+                <li><strong>Evidence Chain:</strong> run → receipt → artifact (ledger-first)</li>
+                <li><strong>Scope Lock:</strong> MVP = 3 core toggles + evidence UX</li>
+                <li><strong>Solo Reality:</strong> build only what one developer can maintain</li>
+            </ol>
+
+            <div class="callout green">
+                <strong>Launch criteria (Month 6, Week 24):</strong>
+                3 beta agencies successful • &lt; 5 critical bugs • performance targets met • documentation complete.
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="document-footer container">
+        <div style="margin-bottom: 14px;">
+            <div style="font-weight: 900; margin-bottom: 6px;">
+                Document Status: <span style="color: var(--accent-green);">EXECUTION-READY</span>
+            </div>
+            <div style="font-size: 0.9rem; margin-bottom: 5px;">
+                Version: 6.1 Final • Audience: WordPress Agencies • Timeframe: 6 Months
+            </div>
+            <div style="font-size: 0.9rem;">
+                Stack: Single VPS • Docker • Caddy • PostgreSQL • FastAPI • n8n • WP Plugin • Web Dashboard
+            </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Final Approval -->
-    <section class="wrap section">
-      <div class="product-callout">
-        <h2>First Product to Market (Locked)</h2>
-        <p>
-          <strong>Sprint 1 delivers:</strong> OpsGate free + Starter tiers with Dashboard MVP, SSL Posture Service, 
-          and Security Scan Service — built on authoritative API architecture with PostgreSQL truth.
-        </p>
-        <div style="display: flex; gap: 16px; justify-content: center; margin-top: 24px; flex-wrap: wrap;">
-          <button class="btn-primary" onclick="window.scrollTo({top: document.getElementById('tiers').offsetTop - 80, behavior: 'smooth'})">
-            Review Business Model
-          </button>
-          <button class="btn-primary" style="background: var(--success);" 
-                  onclick="alert('Strategic framework approved. Proceed with Sprint 1 execution per defined architecture and timeline.')">
-            Approve Strategic Framework
-          </button>
+        <div style="font-size: 0.85rem;">
+            Dashboard-first evidence is the primary proof surface. Exports are secondary packaging derived from the ledger.
         </div>
-      </div>
-    </section>
-  </main>
+    </footer>
 
-  <footer>
-    <div class="wrap">
-      <div class="footer-content">
-        <div style="flex: 2;">
-          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
-            <div class="logo" style="width: 36px; height: 36px;"></div>
-            <span style="font-weight: 700; font-size: 1.25rem; color: var(--text);">OpsGate Strategic Framework</span>
-          </div>
-          <p style="color: var(--muted); line-height: 1.7; max-width: 600px; margin-bottom: 20px;">
-            This document outlines the complete strategic and technical framework for the OpsGate WordPress Operations Control Plane. 
-            All architecture decisions follow the established principle: 
-            <span class="mono" style="font-size: 0.95rem;">Business Model → API → Data Model → Execution → UI</span>.
-          </p>
-          <p style="color: var(--muted); font-size: 0.9rem;">
-            © 2024 OpsGate. Confidential strategic document for internal review and approval only.
-          </p>
-        </div>
-        <div style="flex: 1;">
-          <h4 style="margin-bottom: 20px; color: var(--text); font-size: 1.125rem;">Document Navigation</h4>
-          <div style="display: flex; flex-direction: column; gap: 12px;">
-            <a href="#problem" style="color: var(--muted); transition: color 0.2s;">Market Analysis</a>
-            <a href="#solution" style="color: var(--muted); transition: color 0.2s;">Solution Architecture</a>
-            <a href="#hybrid" style="color: var(--muted); transition: color 0.2s;">Hybrid Architecture</a>
-            <a href="#architecture" style="color: var(--muted); transition: color 0.2s;">Technical Implementation</a>
-            <a href="#tiers" style="color: var(--muted); transition: color 0.2s;">Business Model</a>
-            <a href="#execution" style="color: var(--muted); transition: color 0.2s;">Execution Plan</a>
-            <a href="#qa" style="color: var(--muted); transition: color 0.2s;">Quality Assurance</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+    <script>
+        // Minimal: smooth scroll for nav
+        document.querySelectorAll('.top-nav a').forEach(a => {
+            a.addEventListener('click', (e) => {
+                const href = a.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const el = document.querySelector(href);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
 
-  <script>
-    // Enhanced smooth scrolling with offset calculation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          const headerOffset = 100;
-          const elementPosition = targetElement.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
+        // Toggle demo: only logs, no "product behavior"
+        document.querySelectorAll('.toggle-switch input').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const toggleItem = this.closest('.toggle-item');
+                if (!toggleItem) return;
+                const name = toggleItem.querySelector('div > div')?.textContent?.trim() || 'Toggle';
+                console.log(`${name}: ${this.checked ? 'ON' : 'OFF'}`);
+            });
+        });
+    </script>
 
-    // Navigation active state management
-    window.addEventListener('scroll', () => {
-      const sections = document.querySelectorAll('section[id]');
-      const scrollPosition = window.scrollY + 120;
-      
-      let currentSectionId = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        const sectionId = section.getAttribute('id');
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          currentSectionId = sectionId;
-        }
-      });
-      
-      document.querySelectorAll('.nav-link').forEach(link => {
-        const linkHref = link.getAttribute('href').replace('#', '');
-        if (linkHref === currentSectionId) {
-          link.style.color = 'var(--text)';
-          link.style.background = 'rgba(255,255,255,.05)';
-          link.style.fontWeight = '600';
-        } else {
-          link.style.color = 'var(--muted)';
-          link.style.background = 'transparent';
-          link.style.fontWeight = '500';
-        }
-      });
-    });
-
-    // Initialize navigation state
-    window.dispatchEvent(new Event('scroll'));
-  </script>
 </body>
 </html>
